@@ -1,124 +1,115 @@
-'use strict';
-var newArray = [];
-// создали пустой массив
+'use srtict';
 
-var CONST_NUMBER = 8;
-// создали констунту для повторений
-var TYPE = ['palace', 'flat', 'house', 'bungalo'];
+// нажатие на элемент .map__pin-main приводит к вводу страницы в активное состояние
+// .map перестает содержать .map--faded
+// .ad-form перестает содержать .ad-form--disabled
+// у input, select, .ad-form или из родительского элемента fieldset убирается disabled !!! removeAttribute('disabled');
+// у .map__filters убирается disabled
 
-var CHECKIN = ['12:00', '13:00', '14:00'];
-var newArray = [];
-// создали пустой массив
+var mapActive = document.querySelector('.map__pin--main');
+console.log(mapActive);
+// переменная содержит кнопку метки
 
-var CONST_NUMBER = 8;
-// создали констунту для повторений
-var TYPE = ['palace', 'flat', 'house', 'bungalo'];
+var map = document.querySelector('.map');
+console.log(map);
+// переменная содержит секцию карты
 
-var CHECKIN = ['12:00', '13:00', '14:00'];
+var adForm = document.querySelector('.ad-form');
+console.log(adForm);
+// переменная содержит ваше обьявление
 
-var CHECKOUT = ['12:00', '13:00', '14:00'];
+var mapFilter = document.querySelector('.map__filters');
+console.log(mapFilter);
+// переменная содержит фильтр обьявлений
 
-var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var inputForm = adForm.querySelectorAll('input');
+console.log(inputForm);
+// переменная содержит input находящиеся внутри формы обьявления
 
-var FOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-var getRandomElement = function (array) {
-  var randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
+var selectForm = adForm.querySelectorAll('select');
+console.log(selectForm);
+// переменная содержит select внутри формы обьявления
+
+for (var i = 0; i < inputForm.length; i++) {
+  inputForm[i].setAttribute('disabled', 'disabled');
+  // функция придает свойство disabled к input в форме
 };
 
-var getRandomNumber = function (min, max) {
-  var rand = min + Math.random() * (max + 1 - min);
-  return Math.floor(rand);
+for (var i = 0; i < selectForm.length; i++) {
+  selectForm[i].setAttribute('disabled', 'disabled');
+  // функция придает свойство disabled к select в форме
 };
 
-// в переменной лежит функция случайного числа от минимального до максимального
-
-for (var i = 0; i < CONST_NUMBER; i++) {
-  // создали цикл для повторений
-  newArray[i] = {
-    autor: {
-      avatar: 'img/avatars/user0' + getRandomNumber(1, 8) + '.png',
-    },
-    offer: {
-      title: 'заголовок предложения',
-      address: '600,300',
-      price: 100,
-      type: getRandomElement(TYPE),
-      rooms: 2,
-      guests: 2,
-      checkin: getRandomElement(CHECKIN),
-      checkout: getRandomElement(CHECKOUT),
-      features: getRandomElement(FEATURES),
-      description: 'строка с описанием',
-      photos: getRandomElement(FOTOS),
-    },
-    location: {
-      x: getRandomNumber(1, 1199),
-      y: getRandomNumber(130, 630),
-    }
+var disabledOff = function () {
+  for (var i = 0; i < inputForm.length; i++) {
+    inputForm[i].removeAttribute('disabled', 'false');
   };
-  console.log(newArray[i]);
-}
-
-var mapFaded = document.querySelector('.map');
-
-// переменная для всей карты обьявлений
-
-console.log(mapFaded);
-
-mapFaded.classList.remove('map--faded');
-
-var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-
-// шаблон для создания точек на карте
-
-console.log(mapPinTemplate); // содержит кнопку с иконкой юзера
-
-var mapPinInfo = document.querySelector('#card').content.querySelector('.map__card.popup');
-
-// шаблон для создания окна информации
-
-console.log(mapPinInfo);
-
-//содержит блок информации
-
-var rendInformation = function (info) {
-  // функция находит поле и вставляет тектовую информацию из массива
-
-  var cardElement = mapPinInfo.cloneNode(true);
-
-  cardElement.querySelector('.popup__avatar').textContent = info.autor.avatar;
-  cardElement.querySelector('.popup__title').textContent = info.offer.title;
-  cardElement.querySelector('.popup__text--address').textContent = info.offer.address;
-  cardElement.querySelector('.popup__text--price').textContent = info.offer.price;
-  cardElement.querySelector('.popup__type').textContent = info.offer.type;
-  cardElement.querySelector('.popup__text--capacity').textContent = info.offer.rooms + ' ' + info.offer.guests;
-  cardElement.querySelector('.popup__text--time').textContent = info.offer.checkin + ' ' + info.offer.checkout;
-  cardElement.querySelector('.popup__description').textContent = info.offer.description;
-  cardElement.querySelector('.popup__photos').textContent = info.offer.photos;
-
-  return cardElement;
+  for (var i = 0; i < selectForm.length; i++) {
+    // функция убирает свойство disabled к input в форме
+    selectForm[i].removeAttribute('disabled', 'false');
+    // функция убирает свойство disabled к select в форме
+  };
 };
 
-var renderPin = function (info) {
-  var pinElement = mapPinTemplate.cloneNode(true);
-
-  pinElement.querySelector('img').src = info.autor.avatar;
-  pinElement.style.left = info.location.x + 'px';
-  pinElement.style.top = info.location.y + 'px';
-  pinElement.querySelector('img').alt = info.offer.title;
-  return pinElement;
+var openMap = function () {
+  map.classList.remove('map--faded');
+  // у карты убирается класс
 };
 
-var fragment = document.createDocumentFragment();
+var openAdForm = function () {
+  adForm.classList.remove('ad-form--disabled');
+  // разблокируется форма
+};
+mapActive.addEventListener('click', function
+  // при клике активируется функция
+  () {
+    openMap();
+    openAdForm();
+    disabledOff();
+    addAdress();
+  });
 
-// for (var i = 0; i < newArray.length; i++) {
-// fragment.appendChild(rendInformation(newArray[i]));
-// }
+mapActive.addEventListener('keydown',
+  function (evt) {
+    if (evt.key === ENTER_KEY) {
+      openMap();
+      openAdForm();
+      disabledOff();
+      addAdress();
+    }
+  });
 
-for (var i = 0; i < newArray.length; i++) {
-  fragment.appendChild(renderPin(newArray[i]));
-}
+// !!!
 
-document.querySelector('.map__pins').appendChild(fragment);
-// var mapListElement = document.querySelector('.map__overlay');
+// установить значение поля ввода адреса при клике по кнопке
+// неактивное состояние метка круглая
+// активное состояние поле адресса это координаты острого конца метки
+// перемещение метки в поле адресса острого конца
+// .map__pin--main top: 200px; left: 300px —> 300 + расстоние до острого конца по x, 200 + расстояние до острого конца по y
+
+var PIN_WIDTH = mapActive.offsetWidth;
+console.log(PIN_WIDTH);
+//ширина метки
+
+var PIN_HEUGHT = mapActive.offsetHeight;
+console.log(PIN_HEUGHT);
+//высота метки
+
+var coordY = mapActive.offsetTop + PIN_HEUGHT;
+console.log(coordY);
+// в переменную положили кординату острого угла метки по высоте
+
+var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
+console.log(coordX);
+// в переменную положили кординату острого угла метки по ширине
+
+var addressInput = document.querySelector('#address');
+console.log(addressInput);
+//  в переменную полижили поле адреса
+
+
+var addAdress = function () {
+  var valueAddress = document.querySelector('#address').value = coordX + ',' + coordY;
+  console.log(valueAddress);
+  return valueAddress
+};
