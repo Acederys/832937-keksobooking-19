@@ -113,3 +113,129 @@ var addAdress = function () {
   console.log(valueAddress);
   return valueAddress
 };
+
+// В случае выбора количества комнат, менялся список опций у гостей
+// потребуется такой хитрый объект
+// он делает соответствие между кол-вом гостей и кол-вом комнат для них
+
+
+
+// нажатие на элемент .map__pin-main приводит к вводу страницы в активное состояние
+// .map перестает содержать .map--faded
+// .ad-form перестает содержать .ad-form--disabled
+// у input, select, .ad-form или из родительского элемента fieldset убирается disabled !!! removeAttribute('disabled');
+// у .map__filters убирается disabled
+
+var mapActive = document.querySelector('.map__pin--main');
+console.log(mapActive);
+// переменная содержит кнопку метки
+
+var map = document.querySelector('.map');
+console.log(map);
+// переменная содержит секцию карты
+
+var adForm = document.querySelector('.ad-form');
+console.log(adForm);
+// переменная содержит ваше обьявление
+
+var mapFilter = document.querySelector('.map__filters');
+console.log(mapFilter);
+// переменная содержит фильтр обьявлений
+
+var inputForm = adForm.querySelectorAll('input');
+console.log(inputForm);
+// переменная содержит input находящиеся внутри формы обьявления
+
+var selectForm = adForm.querySelectorAll('select');
+console.log(selectForm);
+// переменная содержит select внутри формы обьявления
+
+var type = document.querySelector('#type');
+// все типы жилья
+
+var price = document.querySelector('#price');
+// цены
+
+var timeIn = document.querySelector('#timein');
+// время вьезда
+
+var timeOut = document.querySelector('#timeout');
+// время выезда
+
+var room_number = document.querySelector('#room_number');
+// количество комнат
+
+var capacity = document.querySelector('#capacity');
+// количество места
+
+type.addEventListener('change', function (evt) {
+// при убирании таргета с типа жилья он должен показывать стоимость в placeholder
+switch (evt.target.value) {
+case 'bungalo':
+price.min = 0;
+price.placeholder = '0';
+bracke;
+case 'flat':
+price.min = 1000;
+price.placeholder = '1000';
+bracke;
+case 'house':
+price.min = 5000;
+price.placeholder = '5000';
+bracke;
+case 'palace':
+price.min = 10000;
+price.placeholder = 10000;
+bracke;
+}
+});
+
+timeIn.addEventListener('change', function(evt) {
+// при задании времени вьезда задается время вызда
+timeOut.value = evt.target.value;
+});
+
+timeOut.addEventListener('change', function(evt) {
+// при задании времени задается вызда время вьезда
+timeIn.value = evt.target.value;
+});
+
+var ROOM_NUMBER = {
+// обьнет с массивами чисел для комнат
+1 : [1],
+2 : [1, 2],
+3 : [1, 2, 3],
+100: [0],
+};
+
+var desabledOption = function(inputValue){
+var capacityOption = capacity.querySelector('option');
+capacityOption[inputValue].forEach(function() {
+capacityOption[inputValue].disabled = 'true';
+});
+ROOM_NUMBER[inputValue].forEach(function() {
+capacity.querySelector('option' + '[value="'+ ROOM_NUMBER[inputValue]+ '"]').disabled = false;
+capacity.value = ROOM_NUMBER[inputValue];
+});
+};
+
+room_number.addEventListener('change', function(){
+desabledOption(room_number.value)
+});
+
+var validaty = function () {
+var guest = ROOM_NUMBER[room_number.value];
+if(guest.indexOf(+capacity.value)=== -1) {
+capacity.setCustomValidity('нет мест');
+} else {
+capacity.setCustomValidity('все ок');
+}
+};
+
+room_number.addEventListener('change', function(evt) {
+evt.target.setCustomValidity('');
+});
+
+capacity.addEventListener('change', function(evt) {
+evt.target.setCustomValidity('');
+});
