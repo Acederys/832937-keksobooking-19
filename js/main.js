@@ -111,7 +111,7 @@ console.log(addressInput);
 var addAdress = function () {
   var valueAddress = document.querySelector('#address').value = coordX + ',' + coordY;
   console.log(valueAddress);
-  return valueAddress
+  return valueAddress;
 };
 
 // В случае выбора количества комнат, менялся список опций у гостей
@@ -208,11 +208,12 @@ var ROOM_NUMBER = {
   100: [0],
 };
 
-capasity[value].forEach(function (option) {
-  type.forEach(function (capasity) {
-    if (capasity.value === option) {
-      capasity.setAttribute('disabled', false);
+capacity[value].forEach(function (option) {
+  type.forEach(function (capacity) {
+    if (capacity.value === option) {
+      capacity.setAttribute('disabled', false);
     }
+  });
 });
 
 room_number.addEventListener('change', function () {
