@@ -162,11 +162,40 @@ var timeIn = document.querySelector('#timein');
 var timeOut = document.querySelector('#timeout');
 // время выезда
 
-var room_number = document.querySelector('#room_number');
+var roomNumber = document.querySelector('#room_number');
 // количество комнат
 
-var capacity = document.querySelector('#capacity');
+var roomCapacity = document.querySelector('#capacity');
 // количество места
+
+var capacityList = roomCapacity.querySelectorAll('option');
+
+var roomOptions = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0]
+};
+
+var calculateGuestsNumber = function (value) {
+  capacityList.forEach(function (option) {
+    option.disabled = true;
+  });
+
+  roomOptions[value].forEach(function (it) {
+    capacityList.forEach(function (opt) {
+      if (Number(opt.value) === it) {
+        opt.disabled = false;
+        opt.selected = true;
+      }
+  });
+});}
+
+calculateGuestsNumber(roomNumber.value);
+
+roomNumber.addEventListener('change', function (event) {
+  calculateGuestsNumber(event.target.value);
+})
 
 type.addEventListener('change', function (evt) {
   // при убирании таргета с типа жилья он должен показывать стоимость в placeholder
@@ -198,30 +227,6 @@ timeIn.addEventListener('change', function (evt) {
 timeOut.addEventListener('change', function (evt) {
   // при задании времени задается вызда время вьезда
   timeIn.value = evt.target.value;
-});
-
-var ROOM_NUMBER = {
-  // обьнет с массивами чисел для комнат
-  1: [1],
-  2: [1, 2],
-  3: [1, 2, 3],
-  100: [0],
-};
-
-capacity[value].forEach(function (option) {
-  type.forEach(function (capacity) {
-    if (capacity.value === option) {
-      capacity.setAttribute('disabled', false);
-    }
-  });
-});
-
-room_number.addEventListener('change', function () {
-  desabledOption(room_number.value)
-});
-
-room_number.addEventListener('change', function (evt) {
-  evt.target.setCustomValidity('');
 });
 
 capacity.addEventListener('change', function (evt) {
