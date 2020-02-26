@@ -7,52 +7,60 @@
 // у .map__filters убирается disabled
 
 (function() {
-  for (var i = 0; i < window.inputForm.length; i++) {
-  window.inputForm[i].setAttribute('disabled', 'disabled');
-  // функция придает свойство disabled к input в форме
+
+  var mapActive = document.querySelector('.map__pin--main');
+console.log(mapActive);
+
+// переменная содержит кнопку метки
+
+var map = document.querySelector('.map');
+console.log(map);
+
+// переменная содержит секцию карты
+
+var adForm = document.querySelector('.ad-form');
+console.log(adForm);
+// переменная содержит ваше обьявление
+
+var mapFilter = document.querySelector('.map__filters');
+console.log(mapFilter);
+// переменная содержит фильтр обьявлений
+
+window.map = {
+  mapActive: mapActive,
+  map: map,
+  adForm: adForm,
+  mapFilter: mapFilter,
 };
 
-for (var i = 0; i < window.selectForm.length; i++) {
-  window.selectForm[i].setAttribute('disabled', 'disabled');
-  // функция придает свойство disabled к select в форме
-};
+window.form.disableOff();
 
-var disabledOff = function () {
-  for (var i = 0; i < window.inputForm.length; i++) {
-    window.inputForm[i].removeAttribute('disabled', 'false');
-  };
-  for (var i = 0; i < window.selectForm.length; i++) {
-    // функция убирает свойство disabled к input в форме
-    window.selectForm[i].removeAttribute('disabled', 'false');
-    // функция убирает свойство disabled к select в форме
-  };
-};
 
-window.openMap = function () {
-  window.map.classList.remove('map--faded');
+var openMap = function () {
+  window.map.map.classList.remove('map--faded');
   // у карты убирается класс
 };
 
-window.openAdForm = function () {
-  window.adForm.classList.remove('ad-form--disabled');
+var openAdForm = function () {
+  window.map.adForm.classList.remove('ad-form--disabled');
   // разблокируется форма
 };
-window.mapActive.addEventListener('mousedown', function
+mapActive.addEventListener('mousedown', function
   // при клике активируется функция
   () {
     openMap();
     openAdForm();
-    disabledOff();
-    addAdress();
+    window.form.disabledOff();
+    window.card.addAdress();
   });
 
-  window.mapActive.addEventListener('keydown',
+mapActive.addEventListener('keydown',
   function (evt) {
     if (evt.key === ENTER_KEY) {
       openMap();
       openAdForm();
-      disabledOff();
-      addAdress();
+      window.form.disabledOff();
+      window.card.addAdress();
     }
   });
 

@@ -12,13 +12,86 @@
 // у .map__filters убирается disabled
 
 (function() {
-  window.calculateGuestsNumber = function (value) {
-    window.capacityList.forEach(function (option) {
+  var addressInput = document.querySelector('#address');
+  console.log(addressInput);
+
+
+  var type = document.querySelector('#type');
+  console.log(type);
+
+  // все типы жилья
+
+  var price = document.querySelector('#price');
+  console.log(price);
+
+  // цены
+
+  var timeIn = document.querySelector('#timein');
+  console.log(timeIn);
+
+  // время вьезда
+
+  var timeOut = document.querySelector('#timeout');
+  console.log(timeOut);
+
+  // время выезда
+
+  var roomNumber = document.querySelector('#room_number');
+  console.log(roomNumber);
+
+  // количество комнат
+
+  var roomCapacity = document.querySelector('#capacity');
+  console.log(roomCapacity);
+
+  // количество места
+
+  var capacityList = roomCapacity.querySelectorAll('option');
+  console.log(capacityList);
+
+
+  var roomOptions = {
+    1: [1],
+    2: [1, 2],
+    3: [1, 2, 3],
+    100: [0]
+  };
+
+
+var inputForm = window.map.adForm.querySelectorAll('input');
+console.log(inputForm);
+
+// переменная содержит input находящиеся внутри формы обьявления
+
+var selectForm = window.map.adForm.querySelectorAll('select');
+console.log(selectForm);
+
+// переменная содержит select внутри формы обьявления
+
+
+window.form = {
+  addressInput: addressInput,
+  type: type,
+  price: price,
+  timeIn: timeIn,
+  timeOut: timeOut,
+  roomNumber: roomNumber,
+  roomCapacity: roomCapacity,
+  capacityList: capacityList,
+  roomOptions: roomOptions,
+  inputForm: inputForm,
+  selectForm: selectForm,
+  // disableForm: disableForm,
+  disabledOff: disabledOff
+};
+
+  var calculateGuestsNumber = function (value) {
+    capacityList.forEach(function (option) {
     option.disabled = true;
   });
 
-  window.roomOptions[value].forEach(function (it) {
-    window.capacityList.forEach(function (opt) {
+  roomOptions[value].forEach(function (it) {
+    capacityList.forEach(function (opt) {
       if (Number(opt.value) === it) {
         opt.disabled = false;
         opt.selected = true;
@@ -28,17 +101,17 @@
 
 calculateGuestsNumber(roomNumber.value);
 
-window.roomNumber.addEventListener('change', function (event) {
+roomNumber.addEventListener('change', function (event) {
   calculateGuestsNumber(event.target.value);
 })
 
-window.type.addEventListener('change', function (evt) {
+type.addEventListener('change', function (evt) {
   // при убирании таргета с типа жилья он должен показывать стоимость в placeholder
   switch (evt.target.value) {
     case 'bungalo':
       price.min = 0;
       price.placeholder = '0';
-      brack;
+      break;
     case 'flat':
       price.min = 1000;
       price.placeholder = '1000';
@@ -54,18 +127,39 @@ window.type.addEventListener('change', function (evt) {
   }
 });
 
-window.timeIn.addEventListener('change', function (evt) {
+timeIn.addEventListener('change', function (evt) {
   // при задании времени вьезда задается время вызда
   timeOut.value = evt.target.value;
 });
 
-window.timeOut.addEventListener('change', function (evt) {
+timeOut.addEventListener('change', function (evt) {
   // при задании времени задается вызда время вьезда
   timeIn.value = evt.target.value;
 });
 
-window.capacity.addEventListener('change', function (evt) {
+capacity.addEventListener('change', function (evt) {
   evt.target.setCustomValidity('');
 });
+
+// var disableForm = function() {
+//   for (var i = 0; i < form.inputForm.length; i++) {
+//     form.inputForm[i].removeAttribute('disabled', 'false')
+//    }
+
+//   for (var i = 0; i < form.selectForm.length; i++) {
+//     form.selectForm[i].removeAttribute('disabled', 'false')
+//   }
+// };
+
+var disabledOff = function () {
+  for (var i = 0; i < form.inputForm.length; i++) {
+    form.inputForm[i].removeAttribute('disabled', 'false');
+  };
+  for (var i = 0; i < form.selectForm.length; i++) {
+    // функция убирает свойство disabled к input в форме
+    form.selectForm[i].removeAttribute('disabled', 'false');
+    // функция убирает свойство disabled к select в форме
+  };
+};
 
 }) ();
