@@ -5,7 +5,7 @@
 // активное состояние поле адресса это координаты острого конца метки
 // перемещение метки в поле адресса острого конца
 
-(function() {
+window.card = (function() {
 var PIN_WIDTH = window.map.mapActive.offsetWidth;
 console.log(PIN_WIDTH);
 

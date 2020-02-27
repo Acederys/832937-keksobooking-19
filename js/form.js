@@ -11,7 +11,7 @@
 // у input, select, .ad-form или из родительского элемента fieldset убирается disabled !!! removeAttribute('disabled');
 // у .map__filters убирается disabled
 
-(function() {
+window.form = (function() {
   var addressInput = document.querySelector('#address');
   console.log(addressInput);
 
@@ -67,23 +67,6 @@ var selectForm = window.map.adForm.querySelectorAll('select');
 console.log(selectForm);
 
 // переменная содержит select внутри формы обьявления
-
-
-window.form = {
-  addressInput: addressInput,
-  type: type,
-  price: price,
-  timeIn: timeIn,
-  timeOut: timeOut,
-  roomNumber: roomNumber,
-  roomCapacity: roomCapacity,
-  capacityList: capacityList,
-  roomOptions: roomOptions,
-  inputForm: inputForm,
-  selectForm: selectForm,
-  // disableForm: disableForm,
-  disabledOff: disabledOff
-};
 
   var calculateGuestsNumber = function (value) {
     capacityList.forEach(function (option) {
@@ -151,7 +134,7 @@ capacity.addEventListener('change', function (evt) {
 //   }
 // };
 
-var disabledOff = function () {
+window.disabledOff = function () {
   for (var i = 0; i < form.inputForm.length; i++) {
     form.inputForm[i].removeAttribute('disabled', 'false');
   };
@@ -160,6 +143,22 @@ var disabledOff = function () {
     form.selectForm[i].removeAttribute('disabled', 'false');
     // функция убирает свойство disabled к select в форме
   };
+};
+
+window.form = {
+  addressInput: addressInput,
+  type: type,
+  price: price,
+  timeIn: timeIn,
+  timeOut: timeOut,
+  roomNumber: roomNumber,
+  roomCapacity: roomCapacity,
+  capacityList: capacityList,
+  roomOptions: roomOptions,
+  inputForm: inputForm,
+  selectForm: selectForm,
+  // disableForm: disableForm,
+  disabledOff: disabledOff
 };
 
 }) ();

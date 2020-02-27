@@ -26,23 +26,16 @@ var mapFilter = document.querySelector('.map__filters');
 console.log(mapFilter);
 // переменная содержит фильтр обьявлений
 
-window.map = {
-  mapActive: mapActive,
-  map: map,
-  adForm: adForm,
-  mapFilter: mapFilter,
-};
-
-window.form.disableOff();
+// window.disabledOff();
 
 
 var openMap = function () {
-  window.map.map.classList.remove('map--faded');
+  map.classList.remove('map--faded');
   // у карты убирается класс
 };
 
 var openAdForm = function () {
-  window.map.adForm.classList.remove('ad-form--disabled');
+ adForm.classList.remove('ad-form--disabled');
   // разблокируется форма
 };
 mapActive.addEventListener('mousedown', function
@@ -50,7 +43,7 @@ mapActive.addEventListener('mousedown', function
   () {
     openMap();
     openAdForm();
-    window.form.disabledOff();
+    window.disabledOff();
     window.card.addAdress();
   });
 
@@ -59,9 +52,13 @@ mapActive.addEventListener('keydown',
     if (evt.key === ENTER_KEY) {
       openMap();
       openAdForm();
-      window.form.disabledOff();
+      window.disabledOff();
       window.card.addAdress();
     }
   });
+
+  window.map = {
+    adForm: adForm
+  }
 
 })();
