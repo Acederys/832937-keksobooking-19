@@ -11,7 +11,7 @@
 // у input, select, .ad-form или из родительского элемента fieldset убирается disabled !!! removeAttribute('disabled');
 // у .map__filters убирается disabled
 
-window.form = (function() {
+(function() {
   var addressInput = document.querySelector('#address');
   console.log(addressInput);
 
@@ -57,16 +57,33 @@ window.form = (function() {
     100: [0]
   };
 
+  var adForm = document.querySelector('.ad-form');
+console.log(adForm);
+// переменная содержит ваше обьявление
 
-var inputForm = window.map.adForm.querySelectorAll('input');
+var inputForm = adForm.querySelectorAll('input');
 console.log(inputForm);
 
 // переменная содержит input находящиеся внутри формы обьявления
 
-var selectForm = window.map.adForm.querySelectorAll('select');
+var selectForm = adForm.querySelectorAll('select');
 console.log(selectForm);
 
 // переменная содержит select внутри формы обьявления
+
+var coordY = window.map.mapActive.offsetTop + window.map.PIN_HEIGHT;
+console.log(coordY);
+
+// в переменную положили кординату острого угла метки по высоте
+
+var coordX = window.map.mapActive.offsetLeft + (0.5 * window.map.PIN_WIDTH);
+console.log(coordX);
+
+var addAdress = function () {
+  var valueAddress = document.querySelector('#address').value = coordX + ',' + coordY;
+  console.log(valueAddress);
+  return valueAddress;
+};
 
   var calculateGuestsNumber = function (value) {
     capacityList.forEach(function (option) {
@@ -124,41 +141,33 @@ capacity.addEventListener('change', function (evt) {
   evt.target.setCustomValidity('');
 });
 
-// var disableForm = function() {
-//   for (var i = 0; i < form.inputForm.length; i++) {
-//     form.inputForm[i].removeAttribute('disabled', 'false')
-//    }
+var disableForm = function() {
+  for (var i = 0; i < form.inputForm.length; i++) {
+    form.inputForm[i].removeAttribute('disabled', 'true')
+   }
 
-//   for (var i = 0; i < form.selectForm.length; i++) {
-//     form.selectForm[i].removeAttribute('disabled', 'false')
-//   }
-// };
+  for (var i = 0; i < form.selectForm.length; i++) {
+    form.selectForm[i].removeAttribute('disabled', 'true')
+  }
+};
 
-window.disabledOff = function () {
+var enableForm = function () {
+  adForm.classList.remove('ad-form--disabled');
+
   for (var i = 0; i < form.inputForm.length; i++) {
     form.inputForm[i].removeAttribute('disabled', 'false');
   };
+
   for (var i = 0; i < form.selectForm.length; i++) {
-    // функция убирает свойство disabled к input в форме
     form.selectForm[i].removeAttribute('disabled', 'false');
-    // функция убирает свойство disabled к select в форме
   };
 };
 
+// экспортируем две функции, чтобы использовать их в map.js
 window.form = {
-  addressInput: addressInput,
-  type: type,
-  price: price,
-  timeIn: timeIn,
-  timeOut: timeOut,
-  roomNumber: roomNumber,
-  roomCapacity: roomCapacity,
-  capacityList: capacityList,
-  roomOptions: roomOptions,
-  inputForm: inputForm,
-  selectForm: selectForm,
-  // disableForm: disableForm,
-  disabledOff: disabledOff
+  disableForm: disableForm,
+  enableForm: enableForm,
+  addAdress: addAdress
 };
 
 }) ();

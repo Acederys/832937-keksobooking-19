@@ -8,6 +8,8 @@
 
 (function() {
 
+  window.form.disableForm();
+
   var mapActive = document.querySelector('.map__pin--main');
 console.log(mapActive);
 
@@ -18,33 +20,32 @@ console.log(map);
 
 // переменная содержит секцию карты
 
-var adForm = document.querySelector('.ad-form');
-console.log(adForm);
-// переменная содержит ваше обьявление
-
 var mapFilter = document.querySelector('.map__filters');
 console.log(mapFilter);
 // переменная содержит фильтр обьявлений
 
-// window.disabledOff();
+var PIN_WIDTH = window.map.mapActive.offsetWidth;
+console.log(PIN_WIDTH);
 
+//ширина метки
+
+var PIN_HEIGHT = window.map.mapActive.offsetHeight;
+console.log(PIN_HEIGHT);
+
+//высота метки
 
 var openMap = function () {
   map.classList.remove('map--faded');
   // у карты убирается класс
 };
 
-var openAdForm = function () {
- adForm.classList.remove('ad-form--disabled');
-  // разблокируется форма
-};
 mapActive.addEventListener('mousedown', function
   // при клике активируется функция
   () {
     openMap();
     openAdForm();
-    window.disabledOff();
-    window.card.addAdress();
+    window.form.enableForm();
+    window.form.addAddress(coordX, coordY);
   });
 
 mapActive.addEventListener('keydown',
@@ -52,13 +53,15 @@ mapActive.addEventListener('keydown',
     if (evt.key === ENTER_KEY) {
       openMap();
       openAdForm();
-      window.disabledOff();
-      window.card.addAdress();
+      window.form.enableForm();
+      window.form.addAddress(coordX, coordY);
     }
   });
 
   window.map = {
-    adForm: adForm
+    mapActive: mapActive,
+    PIN_WIDTH: PIN_WIDTH,
+    PIN_HEIGHT: PIN_HEIGHT
   }
 
 })();
