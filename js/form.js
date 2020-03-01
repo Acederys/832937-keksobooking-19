@@ -1,13 +1,9 @@
-// eslint-disable-next-line strict
-'use srtict';
+'use strict';
 
 (function () {
 
   var addressInput = document.querySelector('#address');
   console.log(addressInput);
-
-  var mapActive = document.querySelector('.map__pin--main');
-  console.log(mapActive);
 
   var type = document.querySelector('#type');
   console.log(type);
@@ -63,24 +59,6 @@
   console.log(selectForm);
 
   // переменная содержит select внутри формы обьявления
-
-  var PIN_WIDTH = mapActive.offsetWidth;
-console.log(PIN_WIDTH);
-
-//ширина метки
-
-var PIN_HEIGHT = mapActive.offsetHeight;
-console.log(PIN_HEIGHT);
-
-//высота метки
-
-  var coordY = mapActive.offsetTop + PIN_HEIGHT;
-  console.log(coordY);
-
-  // в переменную положили кординату острого угла метки по высоте
-
-  var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
-  console.log(coordX);
 
   var address = adForm.querySelector('#address');
 
@@ -145,7 +123,7 @@ console.log(PIN_HEIGHT);
     evt.target.setCustomValidity('');
   });
 
-  var disableForm = function () {
+  var disableForm = function() {
     for (var i = 0; i < inputForm.length; i++) {
       inputForm[i].removeAttribute('disabled', 'true')
     }
