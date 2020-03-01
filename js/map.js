@@ -49,6 +49,7 @@
       window.form.enableForm();
       window.form.addAddress(coordX, coordY);
       window.pins.renderPin();
+      window.pins.visualPin();
     });
 
   mapActive.addEventListener('keydown',
@@ -58,6 +59,7 @@
         window.form.enableForm();
         window.form.addAddress(coordX, coordY);
         window.pins.renderPin();
+        window.pins.visualPin();
       };
     });
 
