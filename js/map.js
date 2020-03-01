@@ -48,6 +48,7 @@
       openMap();
       window.form.enableForm();
       window.form.addAddress(coordX, coordY);
+      window.pins.renderPin();
     });
 
   mapActive.addEventListener('keydown',
@@ -56,11 +57,13 @@
         openMap();
         window.form.enableForm();
         window.form.addAddress(coordX, coordY);
+        window.pins.renderPin();
       };
     });
 
-  window.map = {
-    mapActive: mapActive
-  }
+  mapFilter.addEventListener('submit', function (evt) {
+    window.upload(new FormData(mapFilter));
+    evt.preventDefault();
+  });
 
 })();
