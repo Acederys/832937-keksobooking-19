@@ -111,23 +111,21 @@
       return pinElement;
     };
 
-    var devisualPin = function () {
-      var pinVis = document.querySelectorAll('.map__pins > .map__pin');
-      if (inputForm.disable == true) {
-        pinVis.forEach(function (it) {
-            it.remove();
-        }
-      };
-
-      var visualPin = function () {
+      var devisualPin = function () {
         var pinVis = document.querySelectorAll('.map__pins > .map__pin');
         if (inputForm.disable == false) {
           pinVis.forEach(function (it) {
-              it.add();
+              pinVis.classList.add('hidden');
           }
         };
 
-
+        var visualPin = function () {
+          var pinVis = document.querySelectorAll('.map__pins > .map__pin');
+          if (inputForm.disable == false) {
+            pinVis.forEach(function (it) {
+                pinVis.classList.remove('hidden');
+            }
+          };
       // for (var i = 0; i < newArray.length; i++) {
       // fragment.appendChild(rendInformation(newArray[i]));
       // }
@@ -145,6 +143,5 @@
       // var mapListElement = document.querySelector('.map__overlay');
       window.pins = {
         renderPin: renderPin
-        visualPin: visualPin
       };
     })();
