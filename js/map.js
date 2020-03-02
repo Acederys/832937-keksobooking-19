@@ -57,7 +57,7 @@
         openMap();
         window.form.enableForm();
         window.form.addAddress(coordX, coordY);
-        window.pins. renderPinsList();
+        window.pins.renderPinsList();
       };
     });
 
