@@ -14,7 +14,7 @@
     return pinElement;
   };
 
-  var clearPins = function(){
+  var clearPinsList = function(){
     var pins = document.querySelector('.map__pins').querySelectorAll('.map__pin');
     for (var i = 0; i < pins.length; i++) {
       if (!pins[i].classList.contains('map__pin--main')) {
@@ -43,6 +43,6 @@
   window.pins = {
     loadPins: loadPins,
     renderPinsList: renderPinsList,
-    clearPins:clearPins
+    clearPinsList:clearPinsList
   };
 })();
