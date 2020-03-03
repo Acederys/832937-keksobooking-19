@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var MAX_PINS = 5;
   var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 
@@ -12,17 +13,36 @@
     pinElement.querySelector('img').alt = info.offer.title;
     return pinElement;
   };
-  var renderPinsList = function () {
-    window.load(function (newArray) {
+
+  var clearPins = function(){
+    var pins = document.querySelector('.map__pins').querySelectorAll('.map__pin');
+    for (var i = 0; i < pins.length; i++) {
+      if (!pins[i].classList.contains('map__pin--main')) {
+        pins[i].remove();
+      }
+    }
+  };
+  var renderPinsList = function (pins) {
+
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < 5; i++) {
-        fragment.appendChild(renderPin(newArray[i]));
+      var maxLength = pins.length > MAX_PINS ? 5 : pins.length;
+      for (var i = 0; i < maxLength; i++) {
+        fragment.appendChild(renderPin(pins[i]));
       }
 
       document.querySelector('.map__pins').appendChild(fragment);
+  };
+
+  var loadPins = function() {
+    window.load(function(pinsArray) {
+      window.pins.list = pinsArray;
+      renderPinsList(pinsArray);
     });
   };
+
   window.pins = {
-    renderPinsList: renderPinsList
+    loadPins: loadPins,
+    renderPinsList: renderPinsList,
+    clearPins:clearPins
   };
 })();

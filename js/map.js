@@ -43,21 +43,26 @@
     // у карты убирается класс
   };
 
+  var isPageLoaded = false;
+  var activatePage = function() {
+    if(isPageLoaded){
+      return;
+    }
+    openMap();
+    window.form.enableForm();
+    window.form.addAddress(coordX, coordY);
+    window.pins.loadPins();
+    isPageLoaded = true;
+  };
   mapActive.addEventListener('mousedown',
     function () {
-      openMap();
-      window.form.enableForm();
-      window.form.addAddress(coordX, coordY);
-      window.pins. renderPinsList();
+      activatePage();
     });
 
   mapActive.addEventListener('keydown',
     function (evt) {
       if (evt.key === ENTER_KEY) {
-        openMap();
-        window.form.enableForm();
-        window.form.addAddress(coordX, coordY);
-        window.pins.renderPinsList();
+        activatePage();
       };
     });
 
