@@ -37,6 +37,8 @@
   var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
   console.log(coordX);
 
+  var pinsCard = document.querySelectorAll('.map__pin');
+
 
   var openMap = function () {
     map.classList.remove('map--faded');
