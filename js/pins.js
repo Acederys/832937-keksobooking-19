@@ -4,6 +4,15 @@
   var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var map = document.querySelector('.map');
+  var popupType = {
+    palace: 'Дворец',
+    flat: 'Квартира',
+    house: 'Дом',
+    bungalo: 'Бунгало'
+  };
+  var mapFilterContainr= document.querySelector('.map__filters-container');
+  var template = document.querySelector('template');
+  var popupPhoto = template.content.querySelector('.popup__photo');
 
   var renderPin = function (info) {
     var pinElement = mapPinTemplate.cloneNode(true);
@@ -22,6 +31,26 @@
     pinElement.addEventListener('click', onPinItemClick);
     return pinElement;
   };
+
+  var createFeatureFragment = function (info) {
+    var featureFragment = document.createDocumentFragment();
+    info.offer.features.forEach(function (it) {
+      var featureItem = document.createElement('li');
+      featureItem.className = 'popup__feature popup__feature--' + it;
+      featureFragment.appendChild(featureItem);
+    });
+    return featureFragment;
+  };
+  var createPhotosFragment = function (info) {
+    var photosFragment = document.createDocumentFragment();
+    info.offer.photos.forEach(function (it) {
+      var popupPhotoItem = popupPhoto.cloneNode(true);
+      popupPhotoItem.src = it;
+      photosFragment.appendChild(popupPhotoItem);
+    });
+    return photosFragment;
+  };
+
   var renderCard = function (info) {
     // функция находит поле и вставляет тектовую информацию из массива
 
@@ -30,13 +59,15 @@
     cardElement.querySelector('.map__card img').src = info.author.avatar;
     cardElement.querySelector('.popup__title').textContent = info.offer.title;
     cardElement.querySelector('.popup__text--price').textContent = info.offer.price + ' ₽/ночь';
-    cardElement.querySelector('.popup__type').textContent = info.offer.type;
+    cardElement.querySelector('.popup__type').textContent = popupType[info.offer.type];
     cardElement.querySelector('.popup__text--capacity').textContent = info.offer.rooms + ' комнаты для ' + info.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + info.offer.checkin + ', выезд до ' + info.offer.checkout;
-    cardElement.querySelector('.popup__features').innerHTML = '';
+    cardElement.querySelector('.popup__features').appendChild(createFeatureFragment(info));
     cardElement.querySelector('.popup__description').textContent = info.offer.description;
-    cardElement.querySelector('.popup__photos').textContent = info.offer.photos;
+    cardElement.querySelector('.popup__photos').removeChild(cardElement.querySelector('.popup__photo'));
+    cardElement.querySelector('.popup__photos').appendChild(createPhotosFragment(info));
     var closeBtn = cardElement.querySelector('.popup__close');
+    mapFilterContainr.insertAdjacentElement('beforebegin',cardElement);
     var close = function () {
       cardElement.remove();
       closeBtn.removeEventListener('click', onCloseBtnClick);
@@ -60,7 +91,7 @@
   var clearCardList = function(){
     var card = document.querySelector('.map__card');
     for (var i = 0; i < card.length; i++) {
-      if (!card[i].classList.contains('map__pin--main')) {
+      if (!card[i].classList.contains('.map__pins')) {
         card[i].remove();
       }
     }
@@ -83,7 +114,7 @@
       fragment.appendChild(renderCard(card[i]));
     }
 
-    document.querySelector('.map').appendChild(fragment);
+    document.querySelector('.map__pins').appendChild(fragment);
   };
 
   var loadPins = function() {
