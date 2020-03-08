@@ -66,4 +66,4 @@
   window.card = {
     renderCard: renderCard
   };
-});
+})();
