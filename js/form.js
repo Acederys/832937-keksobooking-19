@@ -62,8 +62,8 @@
 
   var address = adForm.querySelector('#address');
 
-  var addAddress = function(coordX, coordY) {
-    address.value = coordX + ', ' + coordY;
+  var addAddress = function(coord) {
+    address.value = coord.x + ', ' + coord.y;
   }
 
   var calculateGuestsNumber = function (value) {
