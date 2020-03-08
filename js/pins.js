@@ -10,7 +10,7 @@
     house: 'Дом',
     bungalo: 'Бунгало'
   };
-  var mapFilterContainr= document.querySelector('.map__filters-container');
+  var mapFilterContainr = document.querySelector('.map__filters-container');
   var template = document.querySelector('template');
   var popupPhoto = template.content.querySelector('.popup__photo');
 
@@ -67,7 +67,7 @@
     cardElement.querySelector('.popup__photos').removeChild(cardElement.querySelector('.popup__photo'));
     cardElement.querySelector('.popup__photos').appendChild(createPhotosFragment(info));
     var closeBtn = cardElement.querySelector('.popup__close');
-    mapFilterContainr.insertAdjacentElement('beforebegin',cardElement);
+    mapFilterContainr.insertAdjacentElement('beforebegin', cardElement);
     var close = function () {
       cardElement.remove();
       closeBtn.removeEventListener('click', onCloseBtnClick);
@@ -79,7 +79,7 @@
     return cardElement;
   };
 
-  var clearPinsList = function(){
+  var clearPinsList = function () {
     var pins = document.querySelector('.map__pins').querySelectorAll('.map__pin');
     for (var i = 0; i < pins.length; i++) {
       if (!pins[i].classList.contains('map__pin--main')) {
@@ -88,54 +88,27 @@
     }
   };
 
-  var clearCardList = function(){
-    var card = document.querySelector('.map__card');
-    for (var i = 0; i < card.length; i++) {
-      if (!card[i].classList.contains('.map__pins')) {
-        card[i].remove();
-      }
-    }
-  };
   var renderPinsList = function (pins) {
 
-      var fragment = document.createDocumentFragment();
-      var maxLength = pins.length > MAX_PINS ? 5 : pins.length;
-      for (var i = 0; i < maxLength; i++) {
-        fragment.appendChild(renderPin(pins[i]));
-      }
-
-      document.querySelector('.map__pins').appendChild(fragment);
-  };
-
-  var renderCardList = function (card) {
-
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < 1; i++) {
-      fragment.appendChild(renderCard(card[i]));
+    var maxLength = pins.length > MAX_PINS ? 5 : pins.length;
+    for (var i = 0; i < maxLength; i++) {
+      fragment.appendChild(renderPin(pins[i]));
     }
 
     document.querySelector('.map__pins').appendChild(fragment);
   };
 
-  var loadPins = function() {
-    window.load(function(pinsArray) {
+  var loadPins = function () {
+    window.load(function (pinsArray) {
       window.pins.list = pinsArray;
       renderPinsList(pinsArray);
-    });
-  };
-
-  var loadCard = function() {
-    window.load(function(cardArray) {
-      window.pins.list = cardArray;
-      renderCardList(cardArray);
     });
   };
 
   window.pins = {
     loadPins: loadPins,
     renderPinsList: renderPinsList,
-    clearPinsList:clearPinsList,
-    clearCardList:clearCardList,
-    loadCard: loadCard
+    clearPinsList: clearPinsList,
   };
 })();
