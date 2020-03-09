@@ -38,6 +38,8 @@
   var capacityList = roomCapacity.querySelectorAll('option');
   console.log(capacityList);
 
+  var buttomForm = document.querySelector('.ad-form__submit');
+
 
   var roomOptions = {
     1: [1],
@@ -144,6 +146,10 @@
       selectForm[i].removeAttribute('disabled', 'false');
     };
   };
+
+  buttomForm.addEventListener('click', function(){
+    window.load.URLupload();
+  });
 
   // экспортируем две функции, чтобы использовать их в map.js
   window.form = {
