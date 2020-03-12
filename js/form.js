@@ -82,6 +82,12 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
+    window.addEventListener('click', function (evt) {
+      if (evt.keyCode === 27) {
+        var successFragment = template.querySelector('.success');
+        successFragment.remove();
+      }
+    });
   };
 
   var showErrorPopup = function (popup) {
@@ -90,13 +96,13 @@
     document.querySelector('main').appendChild(fragment);
     var errorBtn = document.querySelector('.error__button');
     errorBtn.addEventListener('click', function () {
-      var successFragment = template.querySelector('.success');
-      successFragment.remove();
+      var errorFragment = template.querySelector('.error');
+      errorFragment.remove();
     });
     errorBtn.addEventListener('click', function (evt) {
       if (evt.keyCode === 27) {
-        var successFragment = template.querySelector('.success');
-        successFragment.remove();
+        var errorFragment = template.querySelector('.error');
+        errorFragment.remove();
       }
     });
   };
