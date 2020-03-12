@@ -43,7 +43,7 @@
   };
 
   var loadPins = function () {
-    window.load.URLload(function (pinsArray) {
+    window.load(function (pinsArray) {
       window.pins.list = pinsArray;
       renderPinsList(pinsArray);
     });

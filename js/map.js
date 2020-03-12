@@ -4,10 +4,6 @@
 
   window.form.disableForm();
 
-  var template = document.querySelector('template');
-
-  var buttomForm = document.querySelector('.ad-form__submit');
-
   var mapActive = document.querySelector('.map__pin--main');
   console.log(mapActive);
 
@@ -61,34 +57,6 @@
     map.classList.remove('map--faded');
     // у карты убирается класс
   };
-
-  var renderSuccessPopup = function () {
-    var successFragment = template.querySelector('.success').nodeClone(true);
-    return successFragment;
-  };
-
-  var renderErrorPopup = function () {
-    var errorFragment = template.querySelector('.error').nodeClone(true);
-    return errorFragment;
-  };
-
-  var showSuccessPopup = function (popup) {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(renderSuccessPopup(popup));
-    document.querySelector('main').appendChild(fragment);
-  };
-
-  var showErrorPopup = function (popup) {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(renderErrorPopup(popup));
-    document.querySelector('main').appendChild(fragment);
-  };
-
-  buttomForm.addEventListener('click', function (evt) {
-    var data = new FormData(document.querySelector('.ad-form'));
-    window.load.URLupload(data, showSuccessPopup, showErrorPopup);
-    // evt.preventDefault();
-  });
 
   var isPageLoaded = false;
 

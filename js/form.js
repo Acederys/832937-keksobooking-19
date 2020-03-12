@@ -38,7 +38,11 @@
   var capacityList = roomCapacity.querySelectorAll('option');
   console.log(capacityList);
 
+  var template = document.querySelector('template');
+
   var buttomForm = document.querySelector('.ad-form__submit');
+
+  var errorBtn = document.querySelector('.error__button');
 
 
   var roomOptions = {
@@ -64,7 +68,47 @@
 
   var address = adForm.querySelector('#address');
 
-  var addAddress = function(coord) {
+  var renderSuccessPopup = function () {
+    var successFragment = template.querySelector('.success').nodeClone(true);
+    return successFragment;
+  };
+
+  var renderErrorPopup = function () {
+    var errorFragment = template.querySelector('.error').nodeClone(true);
+    return errorFragment;
+  };
+
+  var showSuccessPopup = function (popup) {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(renderSuccessPopup(popup));
+    document.querySelector('main').appendChild(fragment);
+  };
+
+  var showErrorPopup = function (popup) {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(renderErrorPopup(popup));
+    document.querySelector('main').appendChild(fragment);
+  };
+
+  errorBtn.addEventListener('click', function () {
+    var successFragment = template.querySelector('.success');
+    successFragment.remove();
+  });
+
+  errorBtn.addEventListener('click', function (evt) {
+    if (evt.keyCode === 27) {
+      var successFragment = template.querySelector('.success');
+      successFragment.remove();
+    }
+  });
+
+  buttomForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var data = new FormData(document.querySelector('.ad-form'));
+    window.load.URLupload(data, showSuccessPopup, showErrorPopup);
+  });
+
+  var addAddress = function (coord) {
     address.value = coord.x + ', ' + coord.y;
   }
 
@@ -125,7 +169,7 @@
     evt.target.setCustomValidity('');
   });
 
-  var disableForm = function() {
+  var disableForm = function () {
     for (var i = 0; i < inputForm.length; i++) {
       inputForm[i].removeAttribute('disabled', 'true')
     }
@@ -147,9 +191,7 @@
     };
   };
 
-  buttomForm.addEventListener('click', function(){
-    window.load.URLupload();
-  });
+
 
   // экспортируем две функции, чтобы использовать их в map.js
   window.form = {
