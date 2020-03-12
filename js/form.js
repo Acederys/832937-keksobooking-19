@@ -82,13 +82,14 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    window.addEventListener('keydown', function (evt) {
+    var succesPopup = document.querySelector('.success');
+    succesPopup.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
         var successFragment = template.querySelector('.success');
         successFragment.remove();
       }
     });
-    window.addEventListener('click', function () {
+    succesPopup.addEventListener('click', function () {
       var successFragment = template.querySelector('.success');
         successFragment.remove();
     });
@@ -98,15 +99,13 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var errorBtn = document.querySelector('.error__button');
+    var errorBtn = document.querySelector('.error');
     errorBtn.addEventListener('click', function () {
-      var errorFragment = template.querySelector('.error');
-      errorFragment.remove();
+      errorBtn.remove();
     });
     errorBtn.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
-        var errorFragment = template.querySelector('.error');
-        errorFragment.remove();
+        errorBtn.remove();
       }
     });
   };
