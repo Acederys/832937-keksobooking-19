@@ -82,6 +82,17 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
+    var errorBtn = document.querySelector('.error__button');
+    errorBtn.addEventListener('click', function () {
+      var successFragment = template.querySelector('.success');
+      successFragment.remove();
+    });
+    errorBtn.addEventListener('click', function (evt) {
+      if (evt.keyCode === 27) {
+        var successFragment = template.querySelector('.success');
+        successFragment.remove();
+      }
+    });
   };
 
   var showErrorPopup = function (popup) {
@@ -90,22 +101,11 @@
     document.querySelector('main').appendChild(fragment);
   };
 
-  errorBtn.addEventListener('click', function () {
-    var successFragment = template.querySelector('.success');
-    successFragment.remove();
-  });
-
-  errorBtn.addEventListener('click', function (evt) {
-    if (evt.keyCode === 27) {
-      var successFragment = template.querySelector('.success');
-      successFragment.remove();
-    }
-  });
 
   buttomForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     var data = new FormData(document.querySelector('.ad-form'));
-    window.load.URLupload(data, showSuccessPopup, showErrorPopup);
+    window.upload(data, showSuccessPopup, showErrorPopup);
   });
 
   var addAddress = function (coord) {
