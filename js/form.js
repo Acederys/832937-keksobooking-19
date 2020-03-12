@@ -38,7 +38,7 @@
   var capacityList = roomCapacity.querySelectorAll('option');
   console.log(capacityList);
 
-  var template = document.querySelector('template');
+  var templateSuccess = document.querySelector('template#success');
 
   var buttomForm = document.querySelector('.ad-form__submit');
 
@@ -67,12 +67,12 @@
   var address = adForm.querySelector('#address');
 
   var renderSuccessPopup = function () {
-    var successFragment = template.querySelector('.success').nodeClone(true);
+    var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
     return successFragment;
   };
 
   var renderErrorPopup = function () {
-    var errorFragment = template.querySelector('.error').nodeClone(true);
+    var errorFragment = template.querySelector('.error').cloneNode(true);
     return errorFragment;
   };
 
@@ -106,7 +106,7 @@
   };
 
 
-  buttomForm.addEventListener('submit', function (evt) {
+  adForm.addEventListener('click', function (evt) {
     evt.preventDefault();
     var data = new FormData(adForm);
     window.upload(data, showSuccessPopup, showErrorPopup);

@@ -14,7 +14,7 @@
     });
 
     xhr.send();
-  }
+  };
 
   window.upload = function (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
@@ -22,12 +22,12 @@
     xhr.open('post', URLupload);
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        onSuccess(xhr.response)
+        onSuccess(xhr.response);
       } else {
-        onError(xhr.response)
+        onError(xhr.response);
       }
     });
 
     xhr.send(data);
-  }
+  };
 })();
