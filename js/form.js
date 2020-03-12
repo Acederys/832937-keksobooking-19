@@ -82,6 +82,12 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
+  };
+
+  var showErrorPopup = function (popup) {
+    var fragment = document.createDocumentFragment();
+    fragment.appendChild(renderErrorPopup(popup));
+    document.querySelector('main').appendChild(fragment);
     var errorBtn = document.querySelector('.error__button');
     errorBtn.addEventListener('click', function () {
       var successFragment = template.querySelector('.success');
@@ -93,12 +99,6 @@
         successFragment.remove();
       }
     });
-  };
-
-  var showErrorPopup = function (popup) {
-    var fragment = document.createDocumentFragment();
-    fragment.appendChild(renderErrorPopup(popup));
-    document.querySelector('main').appendChild(fragment);
   };
 
 
