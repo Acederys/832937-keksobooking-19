@@ -42,8 +42,6 @@
 
   var buttomForm = document.querySelector('.ad-form__submit');
 
-  var errorBtn = document.querySelector('.error__button');
-
 
   var roomOptions = {
     1: [1],
@@ -110,7 +108,7 @@
 
   buttomForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    var data = new FormData(document.querySelector('.ad-form'));
+    var data = new FormData(adForm);
     window.upload(data, showSuccessPopup, showErrorPopup);
   });
 
