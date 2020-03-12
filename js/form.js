@@ -40,6 +40,8 @@
 
   var templateSuccess = document.querySelector('template#success');
 
+  var templateError = document.querySelector('template#error');
+
   var buttomForm = document.querySelector('.ad-form__submit');
 
 
@@ -72,7 +74,7 @@
   };
 
   var renderErrorPopup = function () {
-    var errorFragment = template.querySelector('.error').cloneNode(true);
+    var errorFragment = templateError.content.querySelector('.error').cloneNode(true);
     return errorFragment;
   };
 
@@ -80,11 +82,15 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    window.addEventListener('click', function (evt) {
+    window.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
         var successFragment = template.querySelector('.success');
         successFragment.remove();
       }
+    });
+    window.addEventListener('click', function () {
+      var successFragment = template.querySelector('.success');
+        successFragment.remove();
     });
   };
 
@@ -97,7 +103,7 @@
       var errorFragment = template.querySelector('.error');
       errorFragment.remove();
     });
-    errorBtn.addEventListener('click', function (evt) {
+    errorBtn.addEventListener('keydown', function (evt) {
       if (evt.keyCode === 27) {
         var errorFragment = template.querySelector('.error');
         errorFragment.remove();
