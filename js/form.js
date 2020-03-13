@@ -109,7 +109,6 @@
     });
   };
 
-
   adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     var data = new FormData(adForm);
@@ -118,7 +117,7 @@
 
   var addAddress = function (coord) {
     address.value = coord.x + ', ' + coord.y;
-  }
+  };
 
   var calculateGuestsNumber = function (value) {
     capacityList.forEach(function (option) {

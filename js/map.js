@@ -2,6 +2,15 @@
 
 (function () {
 
+  var TAIL_HEIGHT = 16;
+  var PIN_WIDTH = mapActive.offsetWidth;
+
+  //ширина метки
+
+  var PIN_HEIGHT = mapActive.offsetHeight;
+
+  //высота метки
+
   window.form.disableForm();
 
   var mapActive = document.querySelector('.map__pin--main');
@@ -14,15 +23,6 @@
   var mapFilter = document.querySelector('.map__filters');
 
   // переменная содержит фильтр обьявлений
-
-
-  var PIN_WIDTH = mapActive.offsetWidth;
-
-  //ширина метки
-
-  var PIN_HEIGHT = mapActive.offsetHeight;
-
-  //высота метки
 
   var coordY = mapActive.offsetTop + PIN_HEIGHT;
 
@@ -47,8 +47,6 @@
       MAX: 630
     }
   };
-
-  var TAIL_HEIGHT = 16;
   var openMap = function () {
     map.classList.remove('map--faded');
     // у карты убирается класс
