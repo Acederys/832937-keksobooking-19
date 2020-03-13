@@ -52,6 +52,6 @@
   window.pins = {
     loadPins: loadPins,
     renderPinsList: renderPinsList,
-    clearPinsList: clearPinsList,
+    clearPinsList: clearPinsList
   };
 })();
