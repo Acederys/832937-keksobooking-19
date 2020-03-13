@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var ESC_KEY = 27;
 
   var addressInput = document.querySelector('#address');
 
@@ -67,7 +68,7 @@
     document.querySelector('main').appendChild(fragment);
     var succesPopup = document.querySelector('.success');
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === ESC_KEY) {
         succesPopup.remove();
         formReset();
         window.pins.clearPinsList();
@@ -103,7 +104,7 @@
     var errorBtn = document.querySelector('.error');
     errorBtn.addEventListener('click', formOk());
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === 27) {
+      if (evt.keyCode === ESC_KEY) {
         formOk();
       }
     });

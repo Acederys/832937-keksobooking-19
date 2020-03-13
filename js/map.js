@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var mapActive = document.querySelector('.map__pin--main');
   var TAIL_HEIGHT = 16;
   var PIN_WIDTH = mapActive.offsetWidth;
 
@@ -12,9 +12,6 @@
   //высота метки
 
   window.form.disableForm();
-
-  var mapActive = document.querySelector('.map__pin--main');
-  // переменная содержит кнопку метки
 
   var map = document.querySelector('.map');
 
