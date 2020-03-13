@@ -30,6 +30,8 @@
 
   var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
 
+  var adForm = document.querySelector('.ad-form');
+
   var PinSize = {
     WIDTH: 65,
     HEIGHT: 65,
@@ -108,6 +110,11 @@
     document.addEventListener('mouseup', onMouseUp);
   };
 
+  var resetPage = function(){
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+  };
+
   var initPage = function () {
     mapActive.addEventListener('mousedown', onMainPinMouseDown);
   };
@@ -116,5 +123,9 @@
   //   window.upload(new FormData(mapFilter));
   //   evt.preventDefault();
   // });
+
+  window.map = {
+    resetPage: resetPage
+  }
 
 })();
