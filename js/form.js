@@ -61,6 +61,11 @@
     return errorFragment;
   };
 
+  var dellPage = function(){
+    map.classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+  };
+
   var showSuccessPopup = function (popup) {
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
@@ -72,6 +77,7 @@
         formReset();
         window.pins.clearPinsList();
         setMainPinCoords();
+        dellPage();
       }
     });
     succesPopup.addEventListener('click', function () {
@@ -79,6 +85,7 @@
       formReset();
       window.pins.clearPinsList();
       setMainPinCoords();
+      dellPage();
     });
   };
 
