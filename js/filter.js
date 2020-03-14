@@ -10,6 +10,44 @@
   var filteredData = [];
   var filterItems = filterForm.querySelectorAll('select, input');
 
+  var priceArr = {
+    'middle': {
+      'min': 10000,
+      'max': 50000
+    },
+    'low': {
+      'max': 10000
+    },
+    'high': {
+      'min': 50000
+    }
+  };
+
+  // var priceItem = 80000;
+
+  // var priceName = 'height';
+
+  var priceRen = function (priceItem, priceName) {
+    if (priceArr[priceName].min && priceArr[priceName].max) {
+      if (priceArr[priceName].min < priceItem && priceItem < priceArr[priceName].max) {
+        return true;
+      }
+      return false;
+    } else if (priceArr[priceName].max) {
+      if (priceItem < priceArr[priceName].max) {
+        return true;
+      }
+      return false;
+    } else if(priceArr[priceName].min){
+      if (priceItem > priceArr[priceName].min) {
+        return true;
+      }
+      return false;
+    }
+  };
+
+
+
   filterForm.addEventListener('change', function () {
     var data = searchItems(filtersForm);
     var featuresData = searchItems(housingFeatures, true);
@@ -22,14 +60,18 @@
     var filteredPins = window.pins.list.filter(function (it) {
       var trueVar = true;
       for (var key in data) {
-        if (!Array.isArray(data[key]) && it.offer[key] != data[key]) {
-
+        if(key === 'price' && !priceRen(it.offer[key], data[key])){
+            trueVar = false;
+          }
+        if (!Array.isArray(data[key]) && it.offer[key] != data[key] && key !== 'price') {
           trueVar = false;
-        } else if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
+        }
+        if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
           trueVar = false;
         }
       }
       if (trueVar) {
+        console.log(it);
         return it;
       }
       // return it.offer.type === value;
