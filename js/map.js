@@ -106,14 +106,17 @@
     document.addEventListener('mouseup', onMouseUp);
   };
 
-  var resetPage = function(){
+  var resetPage = function () {
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
   };
 
   var initPage = function () {
     mapActive.addEventListener('mousedown', onMainPinMouseDown);
-    window.form.addAddress({x:coordX, y:coordY});
+    window.form.addAddress({
+      x: coordX,
+      y: coordY
+    });
   };
   initPage();
   // mapFilter.addEventListener('submit', function (evt) {

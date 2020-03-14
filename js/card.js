@@ -5,7 +5,16 @@
   var mapFilterContainr = document.querySelector('.map__filters-container');
 
   var template = document.querySelector('template');
+  var oldul = mapCardTemplate.querySelectorAll('.popup__feature');
 
+  for(var i = 0; i < oldul.length; ++i){
+    oldul[i].remove();
+  }
+
+  // var oldul = mapCardTemplate.querySelector('.popup__features');
+  // while( oldul.firstChild ) {
+  //   oldul.removeChild( oldul.firstChild );
+  // }
   var popupPhoto = template.content.querySelector('.popup__photo');
 
   var popupType = {
@@ -17,7 +26,10 @@
 
   var createFeatureFragment = function (info) {
     var featureFragment = document.createDocumentFragment();
+
+
     info.offer.features.forEach(function (it) {
+
       var featureItem = document.createElement('li');
       featureItem.className = 'popup__feature popup__feature--' + it;
       featureFragment.appendChild(featureItem);
@@ -63,7 +75,13 @@
     return cardElement;
   };
 
+  var deleteCard = function(){
+    var cardElement = mapCardTemplate.cloneNode(true);
+    cardElement.remove();
+  };
+
   window.card = {
-    renderCard: renderCard
+    renderCard: renderCard,
+    deleteCard:deleteCard
   };
 }) ();

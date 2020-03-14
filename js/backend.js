@@ -2,7 +2,9 @@
 (function () {
   var URL = 'https://js.dump.academy/keksobooking/data';
   var URLupload = 'https://js.dump.academy/keksobooking';
+  var DEBOUNCE_INTERVAL = 300;
 
+  window.loadJson = false;
   window.load = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
