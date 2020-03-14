@@ -2,6 +2,7 @@
 (function () {
   var filterForm = document.querySelector('.map__filters');
   var houseTypeSelect = filterForm.querySelector('#housing-type');
+  var housed = filterForm.querySelector('#housing-price');
 
   houseTypeSelect.addEventListener('change', function () {
     var value = houseTypeSelect.value;

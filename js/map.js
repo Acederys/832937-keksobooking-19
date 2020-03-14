@@ -1,8 +1,9 @@
 'use strict';
 
 (function () {
-  var mapActive = document.querySelector('.map__pin--main');
+
   var TAIL_HEIGHT = 16;
+  var mapActive = document.querySelector('.map__pin--main');
   var PIN_WIDTH = mapActive.offsetWidth;
 
   //ширина метки
@@ -112,6 +113,7 @@
 
   var initPage = function () {
     mapActive.addEventListener('mousedown', onMainPinMouseDown);
+    window.form.addAddress({x:coordX, y:coordY});
   };
   initPage();
   // mapFilter.addEventListener('submit', function (evt) {

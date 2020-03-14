@@ -67,47 +67,58 @@
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
     var succesPopup = document.querySelector('.success');
-    document.addEventListener('keydown', function (evt) {
+    var removedPopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
+        document.removeEventListener('keydown', removedPopup)
         succesPopup.remove();
         formReset();
         window.pins.clearPinsList();
         setMainPinCoords();
         window.map.resetPage();
-      }
-    });
-    succesPopup.addEventListener('click', function () {
+      };
+    };
+    var removedClockPopup = function (evt) {
+      document.removeEventListener('click', removedPopup)
       succesPopup.remove();
       formReset();
       window.pins.clearPinsList();
       setMainPinCoords();
       window.map.resetPage();
-    });
+    };
+    document.addEventListener('keydown', removedPopup);
+    succesPopup.addEventListener('click', removedClockPopup);
   };
 
-  var formReset = function() {
+  var formReset = function () {
     adForm.reset();
   };
 
-  reset.addEventListener('click', function (evt) {
+  var formResetClick = function (evt) {
     evt.preventDefault();
     formReset();
-  });
+  };
 
-  var formOk = function () {
+  reset.addEventListener('click', formResetClick);
+
+  var removedErorrKeyPopup = function () {
+    document.removeEventListener('click', removedErorrKeyPopup);
     errorBtn.remove();
   };
+
+  var removedErorrPopup = function (evt) {
+    if (evt.keyCode === ESC_KEY) {
+      document.removeEventListener('keydown', removedErorrPopup);
+      errorBtn.remove();
+    };
+  };
+
   var showErrorPopup = function (popup) {
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
     var errorBtn = document.querySelector('.error');
-    errorBtn.addEventListener('click', formOk());
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY) {
-        formOk();
-      }
-    });
+    errorBtn.addEventListener('click', fremovedErorrKeyPopup);
+    document.addEventListener('keydown', removedErorrPopup);
   };
 
   adForm.addEventListener('submit', function (evt) {
@@ -133,13 +144,13 @@
         }
       });
     });
-  }
+  };
 
   calculateGuestsNumber(roomNumber.value);
 
   roomNumber.addEventListener('change', function (event) {
     calculateGuestsNumber(event.target.value);
-  })
+  });
 
   type.addEventListener('change', function (evt) {
     switch (evt.target.value) {
