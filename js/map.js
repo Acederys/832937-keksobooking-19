@@ -30,6 +30,10 @@
 
   var adForm = document.querySelector('.ad-form');
 
+  var mainPin = map.querySelector('.map__pin--main');
+  var mainPinLeft = getComputedStyle(mainPin).left;
+  var mainPinTop = getComputedStyle(mainPin).top;
+
   var PinSize = {
     WIDTH: 65,
     HEIGHT: 65,
@@ -45,6 +49,12 @@
       MAX: 630
     }
   };
+
+  var setMainPinCoords = function () {
+    mainPin.style.left = mainPinLeft;
+    mainPin.style.top = mainPinTop;
+  };
+
   var openMap = function () {
     map.classList.remove('map--faded');
     // у карты убирается класс
@@ -107,8 +117,10 @@
   };
 
   var resetPage = function () {
+    setMainPinCoords();
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
+    isPageLoaded = false;
   };
 
   var initPage = function () {

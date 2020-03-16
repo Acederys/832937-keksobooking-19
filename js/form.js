@@ -43,15 +43,6 @@
 
   var reset = adForm.querySelector('.ad-form__reset');
 
-  var mainPin = map.querySelector('.map__pin--main');
-  var mainPinLeft = getComputedStyle(mainPin).left;
-  var mainPinTop = getComputedStyle(mainPin).top;
-
-  var setMainPinCoords = function () {
-    mainPin.style.left = mainPinLeft;
-    mainPin.style.top = mainPinTop;
-  };
-
   var renderSuccessPopup = function () {
     var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
     return successFragment;
@@ -73,7 +64,6 @@
         succesPopup.remove();
         formReset();
         window.pins.clearPinsList();
-        setMainPinCoords();
         window.map.resetPage();
       };
     };
@@ -82,7 +72,6 @@
       succesPopup.remove();
       formReset();
       window.pins.clearPinsList();
-      setMainPinCoords();
       window.map.resetPage();
     };
     document.addEventListener('keydown', removedPopup);

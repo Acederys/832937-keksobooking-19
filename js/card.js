@@ -5,15 +5,15 @@
   var mapFilterContainr = document.querySelector('.map__filters-container');
 
   var template = document.querySelector('template');
-  var oldul = mapCardTemplate.querySelectorAll('.popup__feature');
+  var popupFeat = mapCardTemplate.querySelectorAll('.popup__feature');
 
-  for(var i = 0; i < oldul.length; ++i){
-    oldul[i].remove();
+  for(var i = 0; i < popupFeat.length; ++i){
+    popupFeat[i].remove();
   }
 
-  // var oldul = mapCardTemplate.querySelector('.popup__features');
-  // while( oldul.firstChild ) {
-  //   oldul.removeChild( oldul.firstChild );
+  // var popupFeat = mapCardTemplate.querySelector('.popup__features');
+  // while( popupFeat.firstChild ) {
+  //   popupFeat.removeChild( popupFeat.firstChild );
   // }
   var popupPhoto = template.content.querySelector('.popup__photo');
 

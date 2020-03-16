@@ -38,7 +38,7 @@
         return true;
       }
       return false;
-    } else if(priceArr[priceName].min){
+    } else if (priceArr[priceName].min) {
       if (priceItem > priceArr[priceName].min) {
         return true;
       }
@@ -46,23 +46,18 @@
     }
   };
 
-
-
-  filterForm.addEventListener('change', function () {
+  var onChangeFilterFormDebounced = window.debounce(function () {
     var data = searchItems(filtersForm);
     var featuresData = searchItems(housingFeatures, true);
     if (featuresData.length > 0) {
       data.features = featuresData;
     }
-
-
-
     var filteredPins = window.pins.list.filter(function (it) {
       var trueVar = true;
       for (var key in data) {
-        if(key === 'price' && !priceRen(it.offer[key], data[key])){
-            trueVar = false;
-          }
+        if (key === 'price' && !priceRen(it.offer[key], data[key])) {
+          trueVar = false;
+        }
         if (!Array.isArray(data[key]) && it.offer[key] != data[key] && key !== 'price') {
           trueVar = false;
         }
@@ -79,8 +74,45 @@
 
     window.pins.clearPinsList();
     window.pins.renderPinsList(filteredPins);
+  });
+
+  // filterForm.addEventListener('change', function () {
+  //   var data = searchItems(filtersForm);
+  //   var featuresData = searchItems(housingFeatures, true);
+  //   if (featuresData.length > 0) {
+  //     data.features = featuresData;
+  //   }
 
 
+
+  //   var filteredPins = window.pins.list.filter(function (it) {
+  //     var trueVar = true;
+  //     for (var key in data) {
+  //       if(key === 'price' && !priceRen(it.offer[key], data[key])){
+  //           trueVar = false;
+  //         }
+  //       if (!Array.isArray(data[key]) && it.offer[key] != data[key] && key !== 'price') {
+  //         trueVar = false;
+  //       }
+  //       if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
+  //         trueVar = false;
+  //       }
+  //     }
+  //     if (trueVar) {
+  //       console.log(it);
+  //       return it;
+  //     }
+  //     // return it.offer.type === value;
+  //   });
+
+  //   window.pins.clearPinsList();
+  //   window.pins.renderPinsList(filteredPins);
+
+
+  // });
+
+  filterForm.addEventListener('change', function () {
+    onChangeFilterFormDebounced();
   });
 
 
