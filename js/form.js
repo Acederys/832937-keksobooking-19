@@ -38,8 +38,6 @@
 
   var reset = adForm.querySelector('.ad-form__reset');
 
-  var errorBtn = document.querySelector('.error');
-
   var renderSuccessPopup = function () {
     var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
     return successFragment;
@@ -90,12 +88,14 @@
   reset.addEventListener('click', formResetClick);
 
   var removedErorrKeyPopup = function () {
+    var errorBtn = document.querySelector('.error');
     document.removeEventListener('click', removedErorrKeyPopup);
     errorBtn.remove();
   };
 
   var removedErorrPopup = function (evt) {
     if (evt.keyCode === ESC_KEY) {
+      var errorBtn = document.querySelector('.error');
       document.removeEventListener('keydown', removedErorrPopup);
       errorBtn.remove();
     }
@@ -105,6 +105,7 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
+    var errorBtn = document.querySelector('.error');
     errorBtn.addEventListener('click', removedErorrKeyPopup);
     document.addEventListener('keydown', removedErorrPopup);
   };
