@@ -97,7 +97,7 @@
       if (where.indexOf(what[i]) == -1) return false;
     }
     return true;
-  }
+  };
   var disableFilter = function () {
     for (var i = 0; i < filterInput.length; i++) {
       filterInput[i].setAttribute('disabled', 'true');
@@ -122,5 +122,5 @@
   window.filter = {
     disableFilter: disableFilter,
     enableFilter: enableFilter
-  }
+  };
 })();

@@ -91,7 +91,7 @@
   var removedErorrKeyPopup = function () {
     document.removeEventListener('click', removedErorrKeyPopup);
     if (errorBtn) {
-    errorBtn.remove();
+      errorBtn.remove();
     }
   };
 
@@ -100,7 +100,7 @@
       document.removeEventListener('keydown', removedErorrPopup);
       if (errorBtn) {
         errorBtn.remove();
-        }
+      }
     }
   };
 
