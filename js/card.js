@@ -7,10 +7,6 @@
   var template = document.querySelector('template');
   var popupFeat = mapCardTemplate.querySelectorAll('.popup__feature');
 
-  for (var i = 0; i < popupFeat.length; ++i) {
-    popupFeat[i].remove();
-  }
-
   var popupPhoto = template.content.querySelector('.popup__photo');
 
   var popupType = {
@@ -19,6 +15,10 @@
     house: 'Дом',
     bungalo: 'Бунгало'
   };
+
+  for (var i = 0; i < popupFeat.length; ++i) {
+    popupFeat[i].remove();
+  }
 
   var createFeatureFragment = function (info) {
     var featureFragment = document.createDocumentFragment();

@@ -4,24 +4,20 @@
 
   var TAIL_HEIGHT = 16;
   var mapActive = document.querySelector('.map__pin--main');
-  var PIN_WIDTH = mapActive.offsetWidth;
+  var pinWidth = mapActive.offsetWidth;
 
-  var PIN_HEIGHT = mapActive.offsetHeight;
-
-  window.form.disableForm();
-  window.filter.disableFilter();
+  var pinHeight = mapActive.offsetHeight;
 
   var map = document.querySelector('.map');
 
-  var coordY = mapActive.offsetTop + PIN_HEIGHT;
+  var coordY = mapActive.offsetTop + pinHeight;
 
-  var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
+  var coordX = mapActive.offsetLeft + (0.5 * pinWidth);
 
   var adForm = document.querySelector('.ad-form');
 
-  var mainPin = map.querySelector('.map__pin--main');
-  var mainPinLeft = getComputedStyle(mainPin).left;
-  var mainPinTop = getComputedStyle(mainPin).top;
+  var mainPinLeft = getComputedStyle(mapActive).left;
+  var mainPinTop = getComputedStyle(mapActive).top;
 
   var PinSize = {
     WIDTH: 65,
@@ -39,16 +35,19 @@
     }
   };
 
+  var isPageLoaded = false;
+
+  window.form.disableForm();
+  window.filter.disableFilter();
+
   var setMainPinCoords = function () {
-    mainPin.style.left = mainPinLeft;
-    mainPin.style.top = mainPinTop;
+    mapActive.style.left = mainPinLeft;
+    mapActive.style.top = mainPinTop;
   };
 
   var openMap = function () {
     map.classList.remove('map--faded');
   };
-
-  var isPageLoaded = false;
 
   var onMainPinMouseDown = function (evt) {
     var startCoords = {
