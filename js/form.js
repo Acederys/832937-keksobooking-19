@@ -37,7 +37,7 @@
   var address = adForm.querySelector('#address');
 
   var reset = adForm.querySelector('.ad-form__reset');
-
+  var errorBtn;
   var renderSuccessPopup = function () {
     var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
     return successFragment;
@@ -89,16 +89,18 @@
   reset.addEventListener('click', formResetClick);
 
   var removedErorrKeyPopup = function () {
-    var errorBtn = document.querySelector('.error');
     document.removeEventListener('click', removedErorrKeyPopup);
+    if (errorBtn) {
     errorBtn.remove();
+    }
   };
 
   var removedErorrPopup = function (evt) {
     if (evt.keyCode === ESC_KEY) {
-      var errorBtn = document.querySelector('.error');
       document.removeEventListener('keydown', removedErorrPopup);
-      errorBtn.remove();
+      if (errorBtn) {
+        errorBtn.remove();
+        }
     }
   };
 
