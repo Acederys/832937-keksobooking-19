@@ -77,6 +77,8 @@
 
   var formReset = function () {
     adForm.reset();
+    window.map.resetPage();
+    window.pins.clearPinsList();
   };
 
   var formResetClick = function (evt) {
