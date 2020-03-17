@@ -4,6 +4,9 @@
   var featuresFieldset = filterForm.querySelector('#housing-features');
   var housingFeatures = featuresFieldset.querySelectorAll('.map__checkbox');
   var filtersForm = document.querySelectorAll('.map__filter');
+  var filterContains = document.querySelector('.map__filters');
+  var filterInput = filterContains.querySelectorAll('input');
+  var filterSelect = filterContains.querySelectorAll('select');
 
   var priceArr = {
     'middle': {
@@ -71,7 +74,7 @@
 
 
   function searchItems(obj, name) {
-    if (name !== true){
+    if (name !== true) {
       name = false;
     }
     var data = [];
@@ -95,5 +98,29 @@
     }
     return true;
   }
+  var disableFilter = function () {
+    for (var i = 0; i < filterInput.length; i++) {
+      filterInput[i].setAttribute('disabled', 'true');
+    }
 
+    for (var a = 0; a < filterSelect.length; a++) {
+      filterSelect[a].setAttribute('disabled', 'true');
+    }
+  };
+
+  var enableFilter = function () {
+
+    for (var i = 0; i < filterInput.length; i++) {
+      filterInput[i].removeAttribute('disabled', 'false');
+    }
+
+    for (var a = 0; a < filterSelect.length; a++) {
+      filterSelect[a].removeAttribute('disabled', 'false');
+    }
+  };
+
+  window.filter = {
+    disableFilter: disableFilter,
+    enableFilter: enableFilter
+  }
 })();

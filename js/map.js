@@ -9,6 +9,7 @@
   var PIN_HEIGHT = mapActive.offsetHeight;
 
   window.form.disableForm();
+  window.filter.disableFilter();
 
   var map = document.querySelector('.map');
 
@@ -91,6 +92,7 @@
       if (!isPageLoaded) {
         openMap();
         window.form.enableForm();
+        window.filter.enableFilter();
         window.pins.loadPins();
         isPageLoaded = true;
       }
