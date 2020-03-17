@@ -174,11 +174,11 @@
 
   var disableForm = function () {
     for (var i = 0; i < inputForm.length; i++) {
-      inputForm[i].removeAttribute('disabled', 'true');
+      inputForm[i].setAttribute('disabled', 'true');
     }
 
     for (var a = 0; a < selectForm.length; a++) {
-      selectForm[a].removeAttribute('disabled', 'true');
+      selectForm[a].setAttribute('disabled', 'true');
     }
   };
 

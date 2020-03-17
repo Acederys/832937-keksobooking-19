@@ -70,7 +70,10 @@
   });
 
 
-  function searchItems(obj, name = false) {
+  function searchItems(obj, name) {
+    if (name !== true){
+      name = false;
+    }
     var data = [];
     for (var i = 0, cnt = obj.length; i < cnt; i++) {
       if (obj[i].tagName === 'INPUT' && obj[i].type === 'checkbox') {
