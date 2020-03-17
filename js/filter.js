@@ -1,14 +1,9 @@
 'use strict';
 (function () {
   var filterForm = document.querySelector('.map__filters');
-  var houseTypeSelect = filterForm.querySelector('#housing-type');
-  var rooms = filterForm.querySelector('#housing-rooms');
   var featuresFieldset = filterForm.querySelector('#housing-features');
   var housingFeatures = featuresFieldset.querySelectorAll('.map__checkbox');
   var filtersForm = document.querySelectorAll('.map__filter');
-  var data = [];
-  var filteredData = [];
-  var filterItems = filterForm.querySelectorAll('select, input');
 
   var priceArr = {
     'middle': {
@@ -22,10 +17,6 @@
       'min': 50000
     }
   };
-
-  // var priceItem = 80000;
-
-  // var priceName = 'height';
 
   var priceRen = function (priceItem, priceName) {
     if (priceArr[priceName].min && priceArr[priceName].max) {
@@ -66,50 +57,13 @@
         }
       }
       if (trueVar) {
-        console.log(it);
         return it;
       }
-      // return it.offer.type === value;
     });
 
     window.pins.clearPinsList();
     window.pins.renderPinsList(filteredPins);
   });
-
-  // filterForm.addEventListener('change', function () {
-  //   var data = searchItems(filtersForm);
-  //   var featuresData = searchItems(housingFeatures, true);
-  //   if (featuresData.length > 0) {
-  //     data.features = featuresData;
-  //   }
-
-
-
-  //   var filteredPins = window.pins.list.filter(function (it) {
-  //     var trueVar = true;
-  //     for (var key in data) {
-  //       if(key === 'price' && !priceRen(it.offer[key], data[key])){
-  //           trueVar = false;
-  //         }
-  //       if (!Array.isArray(data[key]) && it.offer[key] != data[key] && key !== 'price') {
-  //         trueVar = false;
-  //       }
-  //       if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
-  //         trueVar = false;
-  //       }
-  //     }
-  //     if (trueVar) {
-  //       console.log(it);
-  //       return it;
-  //     }
-  //     // return it.offer.type === value;
-  //   });
-
-  //   window.pins.clearPinsList();
-  //   window.pins.renderPinsList(filteredPins);
-
-
-  // });
 
   filterForm.addEventListener('change', function () {
     onChangeFilterFormDebounced();

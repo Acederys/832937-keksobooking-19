@@ -3,8 +3,6 @@
 (function () {
   var ESC_KEY = 27;
 
-  var addressInput = document.querySelector('#address');
-
   var type = document.querySelector('#type');
 
   var price = document.querySelector('#price');
@@ -23,9 +21,6 @@
 
   var templateError = document.querySelector('template#error');
 
-  var buttomForm = document.querySelector('.ad-form__submit');
-  var map = document.querySelector('.map');
-
   var roomOptions = {
     1: [1],
     2: [1, 2],
@@ -42,6 +37,8 @@
   var address = adForm.querySelector('#address');
 
   var reset = adForm.querySelector('.ad-form__reset');
+
+  var errorBtn = document.querySelector('.error');
 
   var renderSuccessPopup = function () {
     var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
@@ -60,15 +57,15 @@
     var succesPopup = document.querySelector('.success');
     var removedPopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
-        document.removeEventListener('keydown', removedPopup)
+        document.removeEventListener('keydown', removedPopup);
         succesPopup.remove();
         formReset();
         window.pins.clearPinsList();
         window.map.resetPage();
-      };
+      }
     };
-    var removedClockPopup = function (evt) {
-      document.removeEventListener('click', removedPopup)
+    var removedClockPopup = function () {
+      document.removeEventListener('click', removedPopup);
       succesPopup.remove();
       formReset();
       window.pins.clearPinsList();
@@ -98,15 +95,14 @@
     if (evt.keyCode === ESC_KEY) {
       document.removeEventListener('keydown', removedErorrPopup);
       errorBtn.remove();
-    };
+    }
   };
 
   var showErrorPopup = function (popup) {
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var errorBtn = document.querySelector('.error');
-    errorBtn.addEventListener('click', fremovedErorrKeyPopup);
+    errorBtn.addEventListener('click', removedErorrKeyPopup);
     document.addEventListener('keydown', removedErorrPopup);
   };
 
@@ -172,17 +168,17 @@
     timeIn.value = evt.target.value;
   });
 
-  capacity.addEventListener('change', function (evt) {
+  roomCapacity.addEventListener('change', function (evt) {
     evt.target.setCustomValidity('');
   });
 
   var disableForm = function () {
     for (var i = 0; i < inputForm.length; i++) {
-      inputForm[i].removeAttribute('disabled', 'true')
+      inputForm[i].removeAttribute('disabled', 'true');
     }
 
-    for (var i = 0; i < selectForm.length; i++) {
-      selectForm[i].removeAttribute('disabled', 'true')
+    for (var a = 0; a < selectForm.length; a++) {
+      selectForm[a].removeAttribute('disabled', 'true');
     }
   };
 
@@ -191,11 +187,11 @@
 
     for (var i = 0; i < inputForm.length; i++) {
       inputForm[i].removeAttribute('disabled', 'false');
-    };
+    }
 
-    for (var i = 0; i < selectForm.length; i++) {
-      selectForm[i].removeAttribute('disabled', 'false');
-    };
+    for (var a = 0; a < selectForm.length; a++) {
+      selectForm[a].removeAttribute('disabled', 'false');
+    }
   };
   // экспортируем две функции, чтобы использовать их в map.js
   window.form = {

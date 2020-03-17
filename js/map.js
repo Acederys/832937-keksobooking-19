@@ -6,25 +6,13 @@
   var mapActive = document.querySelector('.map__pin--main');
   var PIN_WIDTH = mapActive.offsetWidth;
 
-  //ширина метки
-
   var PIN_HEIGHT = mapActive.offsetHeight;
-
-  //высота метки
 
   window.form.disableForm();
 
   var map = document.querySelector('.map');
 
-  // переменная содержит секцию карты
-
-  var mapFilter = document.querySelector('.map__filters');
-
-  // переменная содержит фильтр обьявлений
-
   var coordY = mapActive.offsetTop + PIN_HEIGHT;
-
-  // в переменную положили кординату острого угла метки по высоте
 
   var coordX = mapActive.offsetLeft + (0.5 * PIN_WIDTH);
 
@@ -57,7 +45,6 @@
 
   var openMap = function () {
     map.classList.remove('map--faded');
-    // у карты убирается класс
   };
 
   var isPageLoaded = false;
@@ -100,7 +87,7 @@
       window.form.addAddress(pinTailCoords);
     };
 
-    var onMouseUp = function (upEvt) {
+    var onMouseUp = function () {
       if (!isPageLoaded) {
         openMap();
         window.form.enableForm();
@@ -131,13 +118,9 @@
     });
   };
   initPage();
-  // mapFilter.addEventListener('submit', function (evt) {
-  //   window.upload(new FormData(mapFilter));
-  //   evt.preventDefault();
-  // });
 
   window.map = {
     resetPage: resetPage
-  }
+  };
 
 })();
