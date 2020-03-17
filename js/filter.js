@@ -38,6 +38,7 @@
       }
       return false;
     }
+    return false;
   };
 
   var onChangeFilterFormDebounced = window.debounce(function () {
@@ -46,22 +47,34 @@
     if (featuresData.length > 0) {
       data.features = featuresData;
     }
+
     var filteredPins = window.pins.list.filter(function (it) {
       var trueVar = true;
       for (var key in data) {
-        if (key === 'price' && !priceRen(it.offer[key], data[key])) {
-          trueVar = false;
-        }
-        if (!Array.isArray(data[key]) && it.offer[key] != data[key] && key !== 'price') {
-          trueVar = false;
-        }
-        if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
-          trueVar = false;
+        if (key && data) {
+          if (key === 'price' && !priceRen(it.offer[key], data[key])) {
+            trueVar = false;
+          }
+          if (!Array.isArray(data[key]) && key !== 'price') {
+            if (typeof it.offer[key] === 'number') {
+              if (it.offer[key] !== Number(data[key])) {
+                trueVar = false;
+              }
+            } else {
+              if (it.offer[key] !== data[key]) {
+                trueVar = false;
+              }
+            }
+          }
+          if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
+            trueVar = false;
+          }
         }
       }
       if (trueVar) {
         return it;
       }
+      return false;
     });
 
     window.pins.clearPinsList();
@@ -73,7 +86,7 @@
   });
 
 
-  function searchItems(obj, name) {
+  var searchItems = function (obj, name) {
     if (name !== true) {
       name = false;
     }
@@ -90,11 +103,13 @@
       }
     }
     return data;
-  }
+  };
 
-  function contains(where, what) {
+  var contains = function (where, what) {
     for (var i = 0; i < what.length; i++) {
-      if (where.indexOf(what[i]) == -1) return false;
+      if (where.indexOf(what[i]) === -1) {
+        return false;
+      }
     }
     return true;
   };

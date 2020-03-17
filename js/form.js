@@ -108,7 +108,7 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var errorBtn = document.querySelector('.error');
+    errorBtn = document.querySelector('.error');
     errorBtn.addEventListener('click', removedErorrKeyPopup);
     document.addEventListener('keydown', removedErorrPopup);
   };
