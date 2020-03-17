@@ -78,6 +78,7 @@
     window.map.resetPage();
     window.pins.clearPinsList();
     disableForm();
+    window.filter.disableFilter();
   };
 
   var formResetClick = function (evt) {
