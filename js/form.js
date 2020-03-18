@@ -52,11 +52,11 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var succesPopup = document.querySelector('.success');
+    var successPopup = document.querySelector('.success');
     var removedPopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
         document.removeEventListener('keydown', removedPopup);
-        succesPopup.remove();
+        successPopup.remove();
         formReset();
         window.pins.clearPinsList();
         window.map.resetPage();
@@ -64,13 +64,13 @@
     };
     var removedClockPopup = function () {
       document.removeEventListener('click', removedPopup);
-      succesPopup.remove();
+      successPopup.remove();
       formReset();
       window.pins.clearPinsList();
       window.map.resetPage();
     };
     document.addEventListener('keydown', removedPopup);
-    succesPopup.addEventListener('click', removedClockPopup);
+    successPopup.addEventListener('click', removedClockPopup);
   };
 
   var formReset = function () {
@@ -88,16 +88,16 @@
 
   reset.addEventListener('click', formResetClick);
 
-  var removedErorrKeyPopup = function () {
-    document.removeEventListener('click', removedErorrKeyPopup);
+  var removedErrorKeyPopup = function () {
+    document.removeEventListener('click', removedErrorKeyPopup);
     if (errorBtn) {
       errorBtn.remove();
     }
   };
 
-  var removedErorrPopup = function (evt) {
+  var removedErrorPopup = function (evt) {
     if (evt.keyCode === ESC_KEY) {
-      document.removeEventListener('keydown', removedErorrPopup);
+      document.removeEventListener('keydown', removedErrorPopup);
       if (errorBtn) {
         errorBtn.remove();
       }
@@ -109,8 +109,8 @@
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
     errorBtn = document.querySelector('.error');
-    errorBtn.addEventListener('click', removedErorrKeyPopup);
-    document.addEventListener('keydown', removedErorrPopup);
+    errorBtn.addEventListener('click', removedErrorKeyPopup);
+    document.addEventListener('keydown', removedErrorPopup);
   };
 
   adForm.addEventListener('submit', function (evt) {
@@ -184,8 +184,8 @@
       inputForm[i].setAttribute('disabled', 'true');
     }
 
-    for (var a = 0; a < selectForm.length; a++) {
-      selectForm[a].setAttribute('disabled', 'true');
+    for (var j = 0; j < selectForm.length; j++) {
+      selectForm[j].setAttribute('disabled', 'true');
     }
   };
 
@@ -196,8 +196,8 @@
       inputForm[i].removeAttribute('disabled', 'false');
     }
 
-    for (var a = 0; a < selectForm.length; a++) {
-      selectForm[a].removeAttribute('disabled', 'false');
+    for (var j = 0; j < selectForm.length; j++) {
+      selectForm[j].removeAttribute('disabled', 'false');
     }
   };
   // экспортируем две функции, чтобы использовать их в map.js

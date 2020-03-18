@@ -49,29 +49,34 @@
     }
 
     var filteredPins = window.pins.list.filter(function (it) {
-      var trueVar = true;
+      var
+        verification = true;
       for (var key in data) {
         if (key && data) {
           if (key === 'price' && !priceRen(it.offer[key], data[key])) {
-            trueVar = false;
+
+            verification = false;
           }
           if (!Array.isArray(data[key]) && key !== 'price') {
             if (typeof it.offer[key] === 'number') {
               if (it.offer[key] !== Number(data[key])) {
-                trueVar = false;
+                verification = false;
               }
             } else {
               if (it.offer[key] !== data[key]) {
-                trueVar = false;
+
+                verification = false;
               }
             }
           }
           if (Array.isArray(data[key]) && !contains(it.offer[key], data[key])) {
-            trueVar = false;
+
+            verification = false;
           }
         }
       }
-      if (trueVar) {
+      if (
+        verification) {
         return it;
       }
       return false;
