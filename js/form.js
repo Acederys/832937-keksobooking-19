@@ -3,8 +3,6 @@
 (function () {
   var ESC_KEY = 27;
 
-  var addressInput = document.querySelector('#address');
-
   var type = document.querySelector('#type');
 
   var price = document.querySelector('#price');
@@ -23,9 +21,6 @@
 
   var templateError = document.querySelector('template#error');
 
-  var buttomForm = document.querySelector('.ad-form__submit');
-  var map = document.querySelector('.map');
-
   var roomOptions = {
     1: [1],
     2: [1, 2],
@@ -42,7 +37,7 @@
   var address = adForm.querySelector('#address');
 
   var reset = adForm.querySelector('.ad-form__reset');
-
+  var errorBtn;
   var renderSuccessPopup = function () {
     var successFragment = templateSuccess.content.querySelector('.success').cloneNode(true);
     return successFragment;
@@ -57,29 +52,33 @@
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var succesPopup = document.querySelector('.success');
+    var successPopup = document.querySelector('.success');
     var removedPopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
-        document.removeEventListener('keydown', removedPopup)
-        succesPopup.remove();
+        document.removeEventListener('keydown', removedPopup);
+        successPopup.remove();
         formReset();
         window.pins.clearPinsList();
         window.map.resetPage();
-      };
+      }
     };
-    var removedClockPopup = function (evt) {
-      document.removeEventListener('click', removedPopup)
-      succesPopup.remove();
+    var removedClockPopup = function () {
+      document.removeEventListener('click', removedPopup);
+      successPopup.remove();
       formReset();
       window.pins.clearPinsList();
       window.map.resetPage();
     };
     document.addEventListener('keydown', removedPopup);
-    succesPopup.addEventListener('click', removedClockPopup);
+    successPopup.addEventListener('click', removedClockPopup);
   };
 
   var formReset = function () {
     adForm.reset();
+    window.map.resetPage();
+    window.pins.clearPinsList();
+    disableForm();
+    window.filter.disableFilter();
   };
 
   var formResetClick = function (evt) {
@@ -89,25 +88,29 @@
 
   reset.addEventListener('click', formResetClick);
 
-  var removedErorrKeyPopup = function () {
-    document.removeEventListener('click', removedErorrKeyPopup);
-    errorBtn.remove();
+  var removedErrorKeyPopup = function () {
+    document.removeEventListener('click', removedErrorKeyPopup);
+    if (errorBtn) {
+      errorBtn.remove();
+    }
   };
 
-  var removedErorrPopup = function (evt) {
+  var removedErrorPopup = function (evt) {
     if (evt.keyCode === ESC_KEY) {
-      document.removeEventListener('keydown', removedErorrPopup);
-      errorBtn.remove();
-    };
+      document.removeEventListener('keydown', removedErrorPopup);
+      if (errorBtn) {
+        errorBtn.remove();
+      }
+    }
   };
 
   var showErrorPopup = function (popup) {
     var fragment = document.createDocumentFragment();
     fragment.appendChild(renderErrorPopup(popup));
     document.querySelector('main').appendChild(fragment);
-    var errorBtn = document.querySelector('.error');
-    errorBtn.addEventListener('click', fremovedErorrKeyPopup);
-    document.addEventListener('keydown', removedErorrPopup);
+    errorBtn = document.querySelector('.error');
+    errorBtn.addEventListener('click', removedErrorKeyPopup);
+    document.addEventListener('keydown', removedErrorPopup);
   };
 
   adForm.addEventListener('submit', function (evt) {
@@ -172,17 +175,17 @@
     timeIn.value = evt.target.value;
   });
 
-  capacity.addEventListener('change', function (evt) {
+  roomCapacity.addEventListener('change', function (evt) {
     evt.target.setCustomValidity('');
   });
 
   var disableForm = function () {
     for (var i = 0; i < inputForm.length; i++) {
-      inputForm[i].removeAttribute('disabled', 'true')
+      inputForm[i].setAttribute('disabled', 'true');
     }
 
-    for (var i = 0; i < selectForm.length; i++) {
-      selectForm[i].removeAttribute('disabled', 'true')
+    for (var j = 0; j < selectForm.length; j++) {
+      selectForm[j].setAttribute('disabled', 'true');
     }
   };
 
@@ -191,11 +194,11 @@
 
     for (var i = 0; i < inputForm.length; i++) {
       inputForm[i].removeAttribute('disabled', 'false');
-    };
+    }
 
-    for (var i = 0; i < selectForm.length; i++) {
-      selectForm[i].removeAttribute('disabled', 'false');
-    };
+    for (var j = 0; j < selectForm.length; j++) {
+      selectForm[j].removeAttribute('disabled', 'false');
+    }
   };
   // экспортируем две функции, чтобы использовать их в map.js
   window.form = {

@@ -7,14 +7,6 @@
   var template = document.querySelector('template');
   var popupFeat = mapCardTemplate.querySelectorAll('.popup__feature');
 
-  for(var i = 0; i < popupFeat.length; ++i){
-    popupFeat[i].remove();
-  }
-
-  // var popupFeat = mapCardTemplate.querySelector('.popup__features');
-  // while( popupFeat.firstChild ) {
-  //   popupFeat.removeChild( popupFeat.firstChild );
-  // }
   var popupPhoto = template.content.querySelector('.popup__photo');
 
   var popupType = {
@@ -24,9 +16,12 @@
     bungalo: 'Бунгало'
   };
 
+  for (var i = 0; i < popupFeat.length; ++i) {
+    popupFeat[i].remove();
+  }
+
   var createFeatureFragment = function (info) {
     var featureFragment = document.createDocumentFragment();
-
 
     info.offer.features.forEach(function (it) {
 
@@ -75,13 +70,13 @@
     return cardElement;
   };
 
-  var deleteCard = function(){
+  var deleteCard = function () {
     var cardElement = mapCardTemplate.cloneNode(true);
     cardElement.remove();
   };
 
   window.card = {
     renderCard: renderCard,
-    deleteCard:deleteCard
+    deleteCard: deleteCard
   };
-}) ();
+})();
