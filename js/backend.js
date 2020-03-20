@@ -1,7 +1,9 @@
 'use strict';
 (function () {
   var URL = 'https://js.dump.academy/keksobooking/data';
-  var URLupload = 'https://js.dump.academy/keksobooking';
+  var URL_UPLOAD = 'https://js.dump.academy/keksobooking';
+
+  var ERROR_NIMBER = 200;
 
   window.load = function (onSuccess) {
     var xhr = new XMLHttpRequest();
@@ -19,9 +21,9 @@
   window.upload = function (data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.open('post', URLupload);
+    xhr.open('post', URL_UPLOAD);
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === ERROR_NIMBER) {
         onSuccess(xhr.response);
       } else {
         onError(xhr.response);

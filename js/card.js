@@ -2,10 +2,10 @@
 (function () {
   var mapCardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
-  var mapFilterContainr = document.querySelector('.map__filters-container');
+  var mapFilterContainer = document.querySelector('.map__filters-container');
 
   var template = document.querySelector('template');
-  var popupFeat = mapCardTemplate.querySelectorAll('.popup__feature');
+  var popupFeats = mapCardTemplate.querySelectorAll('.popup__feature');
 
   var popupPhoto = template.content.querySelector('.popup__photo');
 
@@ -16,8 +16,8 @@
     bungalo: 'Бунгало'
   };
 
-  for (var i = 0; i < popupFeat.length; ++i) {
-    popupFeat[i].remove();
+  for (var i = 0; i < popupFeats.length; ++i) {
+    popupFeats[i].remove();
   }
 
   var createFeatureFragment = function (info) {
@@ -58,7 +58,7 @@
     cardElement.querySelector('.popup__photos').removeChild(cardElement.querySelector('.popup__photo'));
     cardElement.querySelector('.popup__photos').appendChild(createPhotosFragment(info));
     var closeBtn = cardElement.querySelector('.popup__close');
-    mapFilterContainr.insertAdjacentElement('beforebegin', cardElement);
+    mapFilterContainer.insertAdjacentElement('beforebegin', cardElement);
     var close = function () {
       cardElement.remove();
       closeBtn.removeEventListener('click', onCloseBtnClick);
@@ -71,8 +71,8 @@
   };
 
   var deleteCard = function () {
-    var cardElement = mapCardTemplate.cloneNode(true);
-    cardElement.remove();
+    var cardPoppup = document.querySelector('.map__card.popup');
+    cardPoppup.remove();
   };
 
   window.card = {

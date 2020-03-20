@@ -5,8 +5,8 @@
   var housingFeatures = featuresFieldset.querySelectorAll('.map__checkbox');
   var filtersForm = document.querySelectorAll('.map__filter');
   var filterContains = document.querySelector('.map__filters');
-  var filterInput = filterContains.querySelectorAll('input');
-  var filterSelect = filterContains.querySelectorAll('select');
+  var filterInputs = filterContains.querySelectorAll('input');
+  var filterSelects = filterContains.querySelectorAll('select');
 
   var priceArr = {
     'middle': {
@@ -84,6 +84,7 @@
 
     window.pins.clearPinsList();
     window.pins.renderPinsList(filteredPins);
+    window.card.deleteCard();
   });
 
   filterForm.addEventListener('change', function () {
@@ -119,23 +120,23 @@
     return true;
   };
   var disableFilter = function () {
-    for (var i = 0; i < filterInput.length; i++) {
-      filterInput[i].setAttribute('disabled', 'true');
+    for (var i = 0; i < filterInputs.length; i++) {
+      filterInputs[i].setAttribute('disabled', 'true');
     }
 
-    for (var a = 0; a < filterSelect.length; a++) {
-      filterSelect[a].setAttribute('disabled', 'true');
+    for (var a = 0; a < filterSelects.length; a++) {
+      filterSelects[a].setAttribute('disabled', 'true');
     }
   };
 
   var enableFilter = function () {
 
-    for (var i = 0; i < filterInput.length; i++) {
-      filterInput[i].removeAttribute('disabled', 'false');
+    for (var i = 0; i < filterInputs.length; i++) {
+      filterInputs[i].removeAttribute('disabled', 'false');
     }
 
-    for (var a = 0; a < filterSelect.length; a++) {
-      filterSelect[a].removeAttribute('disabled', 'false');
+    for (var a = 0; a < filterSelects.length; a++) {
+      filterSelects[a].removeAttribute('disabled', 'false');
     }
   };
 

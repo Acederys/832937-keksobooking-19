@@ -32,6 +32,9 @@
 
   var inputForm = adForm.querySelectorAll('input');
 
+  var fieldForm = adForm.querySelectorAll('fieldset');
+
+
   var selectForm = adForm.querySelectorAll('select');
 
   var address = adForm.querySelector('#address');
@@ -53,9 +56,9 @@
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
     var successPopup = document.querySelector('.success');
-    var removedPopup = function (evt) {
+    var removePopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
-        document.removeEventListener('keydown', removedPopup);
+        document.removeEventListener('keydown', removePopup);
         successPopup.remove();
         formReset();
         window.pins.clearPinsList();
@@ -63,13 +66,13 @@
       }
     };
     var removedClockPopup = function () {
-      document.removeEventListener('click', removedPopup);
+      document.removeEventListener('click', removePopup);
       successPopup.remove();
       formReset();
       window.pins.clearPinsList();
       window.map.resetPage();
     };
-    document.addEventListener('keydown', removedPopup);
+    document.addEventListener('keydown', removePopup);
     successPopup.addEventListener('click', removedClockPopup);
   };
 
@@ -160,7 +163,7 @@
         break;
       case 'palace':
         price.min = 10000;
-        price.placeholder = 10000;
+        price.placeholder = '10000';
         break;
     }
   });
@@ -187,6 +190,10 @@
     for (var j = 0; j < selectForm.length; j++) {
       selectForm[j].setAttribute('disabled', 'true');
     }
+
+    for (var k = 0; k < fieldForm.length; k++) {
+      fieldForm[k].setAttribute('disabled', 'true');
+    }
   };
 
   var enableForm = function () {
@@ -198,6 +205,9 @@
 
     for (var j = 0; j < selectForm.length; j++) {
       selectForm[j].removeAttribute('disabled', 'false');
+    }
+    for (var k = 0; k < fieldForm.length; k++) {
+      fieldForm[k].removeAttribute('disabled', 'true');
     }
   };
   // экспортируем две функции, чтобы использовать их в map.js
