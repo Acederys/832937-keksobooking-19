@@ -148,7 +148,7 @@
     calculateGuestsNumber(event.target.value);
   });
 
-  function getPlaceholderGuest(roomNumberValue) {
+  var getPlaceholderGuest = function (roomNumberValue) {
     switch (roomNumberValue) {
       case '1':
         return 1;
@@ -158,9 +158,9 @@
         return 3;
     }
     return 0;
-  }
+  };
 
-  function getPlaceholderPrice(typeValue) {
+  var getPlaceholderPrice = function (typeValue) {
     switch (typeValue) {
       case 'bungalo':
         return 0;
@@ -172,7 +172,7 @@
         return 10000;
     }
     return 0;
-  }
+  };
 
   price.placeholder = getPlaceholderPrice(type.value);
 
