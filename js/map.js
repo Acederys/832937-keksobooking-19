@@ -50,6 +50,14 @@
   };
 
   var onMainPinMouseDown = function (evt) {
+    if (!isPageLoaded) {
+      openMap();
+      window.form.enableForm();
+      window.filter.enableFilter();
+      window.pins.loadPins();
+      isPageLoaded = true;
+    }
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -88,14 +96,6 @@
     };
 
     var onMouseUp = function () {
-      if (!isPageLoaded) {
-        openMap();
-        window.form.enableForm();
-        window.filter.enableFilter();
-        window.pins.loadPins();
-        isPageLoaded = true;
-      }
-
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };

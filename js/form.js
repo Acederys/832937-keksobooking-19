@@ -56,9 +56,9 @@
     fragment.appendChild(renderSuccessPopup(popup));
     document.querySelector('main').appendChild(fragment);
     var successPopup = document.querySelector('.success');
-    var removePopup = function (evt) {
+    var removedPopup = function (evt) {
       if (evt.keyCode === ESC_KEY) {
-        document.removeEventListener('keydown', removePopup);
+        document.removeEventListener('keydown', removedPopup);
         successPopup.remove();
         formReset();
         window.pins.clearPinsList();
@@ -66,18 +66,19 @@
       }
     };
     var removedClockPopup = function () {
-      document.removeEventListener('click', removePopup);
+      document.removeEventListener('click', removedPopup);
       successPopup.remove();
       formReset();
       window.pins.clearPinsList();
       window.map.resetPage();
     };
-    document.addEventListener('keydown', removePopup);
+    document.addEventListener('keydown', removedPopup);
     successPopup.addEventListener('click', removedClockPopup);
   };
 
   var formReset = function () {
     adForm.reset();
+    roomCapacity.value = getPlaceholderGuest(roomNumber.value);
     window.map.resetPage();
     window.pins.clearPinsList();
     disableForm();
@@ -146,6 +147,35 @@
   roomNumber.addEventListener('change', function (event) {
     calculateGuestsNumber(event.target.value);
   });
+
+  function getPlaceholderGuest(roomNumberValue) {
+    switch (roomNumberValue) {
+      case '1':
+        return 1;
+      case '2':
+        return 2;
+      case '3':
+        return 3;
+    }
+    return 0;
+  }
+
+  function getPlaceholderPrice(typeValue) {
+    switch (typeValue) {
+      case 'bungalo':
+        return 0;
+      case 'flat':
+        return 1000;
+      case 'house':
+        return 5000;
+      case 'palace':
+        return 10000;
+    }
+    return 0;
+  }
+
+  price.placeholder = getPlaceholderPrice(type.value);
+
 
   type.addEventListener('change', function (evt) {
     switch (evt.target.value) {
