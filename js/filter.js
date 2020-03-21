@@ -93,7 +93,7 @@
 
 
   var searchItems = function (obj, name) {
-    if (name !== true) {
+    if (!name) {
       name = false;
     }
     var data = [];

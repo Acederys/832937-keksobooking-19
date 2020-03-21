@@ -63,6 +63,7 @@
         formReset();
         window.pins.clearPinsList();
         window.map.resetPage();
+        window.card.deleteCard();
       }
     };
     var removedClockPopup = function () {
@@ -88,6 +89,7 @@
   var formResetClick = function (evt) {
     evt.preventDefault();
     formReset();
+    window.card.deleteCard();
   };
 
   reset.addEventListener('click', formResetClick);
@@ -148,6 +150,7 @@
     calculateGuestsNumber(event.target.value);
   });
 
+
   var getPlaceholderGuest = function (roomNumberValue) {
     switch (roomNumberValue) {
       case '1':
@@ -175,6 +178,15 @@
   };
 
   price.placeholder = getPlaceholderPrice(type.value);
+
+  price.addEventListener('change', function (evt) {
+    var target = evt.target;
+    if (target.value < getPlaceholderPrice(type.value)) {
+      price.setCustomValidity('миниально' + getPlaceholderPrice(type.value));
+    } else {
+      price.setCustomValidity('');
+    }
+  });
 
 
   type.addEventListener('change', function (evt) {

@@ -115,6 +115,7 @@
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     isPageLoaded = false;
+    window.card.deleteCard();
   };
 
   var initPage = function () {
