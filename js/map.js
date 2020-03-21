@@ -106,6 +106,12 @@
 
   var resetPage = function () {
     setMainPinCoords();
+
+    window.form.addAddress({
+      x: coordX,
+      y: coordY
+    });
+
     map.classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     isPageLoaded = false;

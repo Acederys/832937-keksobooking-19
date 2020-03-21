@@ -71,8 +71,11 @@
   };
 
   var deleteCard = function () {
-    var cardPoppup = document.querySelector('.map__card.popup');
-    cardPoppup.remove();
+    var cardPopup = document.querySelector('.map__card.popup');
+
+    if (cardPopup) {
+      cardPopup.remove();
+    }
   };
 
   window.card = {
